@@ -5,14 +5,25 @@ public class Option {
 	private int rowTwo;
 	private int colOne;
 	private int colTwo;
+	private int win;
 	
 	
-	public Option (int currentgrid [][], int row1, int row2, int col1, int col2){
+	public Option (int currentgrid [][], int row1, int row2, int col1, int col2, boolean condition){
 		setGrid (currentgrid);
 		setRowOne (row1);
 		setRowTwo (row2);
 		setColOne (col1);
 		setColTwo (col2);
+	}
+
+
+	public int getWin() {
+		return win;
+	}
+
+
+	public void setWin(int win) {
+		this.win = win;
 	}
 
 
