@@ -48,6 +48,13 @@ public class Functions {
 		lastoptionrow2 = row2;
 		lastoptioncol2 = col2;
 		combinations++;
+		Option option = new Option (currentgrid, row1, row2, col1, col2);
+		Option option2 = new Option (currentgrid, row1 + 1, row2 + 1, col1 + 1, col2 + 1);
+		TreeNode tree = new TreeNode (option);
+		TreeNode tree2 = new TreeNode (option2);
+		tree.addChildNode(tree);
+		tree.addChildNode(tree2);
+		println(option.getRowOne(tree.getParent()))
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
