@@ -21,6 +21,7 @@ public class Main {
 		System.out.println(Functions.lastoptionrow2);
 		System.out.println(Functions.lastoptioncol2);
 		
+		
 	}
 
 
