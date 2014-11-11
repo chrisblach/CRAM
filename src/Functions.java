@@ -4,8 +4,8 @@ import java.io.*;
 
 public class Functions {
 
-	static int numofrows = 5;
-	static int numofcols = 5;
+	static int numofrows = 3;
+	static int numofcols = 3;
 	static int temp = 0;
 	static int combinations = 0;
 	static int combinationstemp = 0;
@@ -20,11 +20,11 @@ public class Functions {
 	
 	public static int number = 0;
 	
-	public static boolean solvecramHor (int currentgrid [][], int row,int onCol)	{
+	public static boolean solvecram (int currentgrid [][], int row,int onCol)	{
 		for (int r = row;r <= numofrows - 1;r++){
 			for (int col = onCol; col < numofcols - 1;col++){
 				if (canPlaceHor (currentgrid,r,col)){
-					placeOptionHor(currentgrid,r,col,r,col + 1);
+					placeOption(currentgrid,r,col,r,col + 1);
 					removeOptionHor (currentgrid,lastoptionrow1,lastoptioncol1,lastoptionrow2,lastoptioncol2);
 				}
 			}
@@ -32,7 +32,7 @@ public class Functions {
 		for (int col = onCol; col <= numofcols - 1; col++){
 			for (int r = row; r < numofrows - 1; r++){
 				if (canPlaceVer (currentgrid,r,col)){
-					placeOptionVer(currentgrid,r,col,r + 1,col);
+					placeOption(currentgrid,r,col,r + 1,col);
 					removeOptionVer (currentgrid,lastoptionrow1,lastoptioncol1,lastoptionrow2,lastoptioncol2);
 				}
 			}
@@ -41,7 +41,10 @@ public class Functions {
 		return false;	
 	}
 	
-	public static void placeOptionHor (int currentgrid [][], int row1, int col1, int row2, int col2){
+	public static void placeOption (int currentgrid [][], int row1, int col1, int row2, int col2){
+		Option option = new Option(currentgrid,row1,row2,col1,col2,false);
+		GenericTreeNode <Option> optionnode =  new GenericTreeNode<Option>(option);
+	    Main.tree.getRoot().addChild(optionnode);
 		currentgrid [row1][col1] = 1;
 		currentgrid [row2][col2] = 1;
 		lastoptionrow1 = row1;
@@ -49,12 +52,12 @@ public class Functions {
 		lastoptionrow2 = row2;
 		lastoptioncol2 = col2;
 		combinations++;
-		/*try {
+		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		for(int i = 0; i < numofrows; i++)
 		   {
 		      for(int j = 0; j < numofcols; j++)
@@ -76,12 +79,12 @@ public class Functions {
 		lastoptionrow2 = row2;
 		lastoptioncol2 = col2;
 		combinations++;
-		/*try {
+		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		for(int i = 0; i < numofrows; i++)
 		   {
 		      for(int j = 0; j < numofcols; j++)
