@@ -1,6 +1,14 @@
 
 public class Option {
-	private int [][] grid = new int[][] {};
+	private static int [][] grid = new int[][] { 
+		
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0}
+				
+		};
 	private int rowOne;
 	private int rowTwo;
 	private int colOne;
@@ -8,7 +16,7 @@ public class Option {
 	private int win;
 	
 	
-	public Option (int currentgrid [][], int row1, int row2, int col1, int col2, boolean condition){
+	public Option (int currentgrid [][], int row1, int col1, int row2, int col2, boolean condition){
 		setGrid (currentgrid);
 		setRowOne (row1);
 		setRowTwo (row2);

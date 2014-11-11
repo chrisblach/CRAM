@@ -69,6 +69,94 @@ public class GenericTree<T> {
 
         return returnNode;
     }
+    
+    public boolean buildTree (GenericTreeNode<Option> startnode,int row,int col) {
+    	
+        if(root != null) {
+         return auxBuildTree(startnode,row,col);
+        }
+		return false;
+
+     
+    }
+    
+    private boolean auxBuildTree (GenericTreeNode<Option> currentNode, int row, int onCol) {
+        int i = 0;
+        if (!currentNode.equals(root) && currentNode.getNumberOfChildren() == 0){
+        	System.out.println(currentNode.getNumberOfChildren());
+        	return true;
+        }
+        if (currentNode.equals(root) && !currentNode.hasChildren()) {
+        	System.out.println("Am i still in here for some reason?");
+        	for (int r = row;r <= Functions.getNumofrows() - 1;r++){
+    			for (int col = onCol; col < Functions.getNumofcols() - 1;col++){
+    				if (Functions.canPlaceHor (currentNode.getData().getGrid(),r,col)){
+    					Functions.placeOption(currentNode.getData().getGrid(),r,col,r,col + 1, currentNode);
+    					Functions.removeOption (currentNode.getData().getGrid(),Functions.getLastoptionrow1(),Functions.getLastoptioncol1(),Functions.getLastoptionrow2(),Functions.getLastoptioncol2());
+    				}
+    			}
+    		}
+    		for (int col = onCol; col <= Functions.getNumofcols() - 1; col++){
+    			for (int r = row; r < Functions.getNumofrows() - 1; r++){
+    				if (Functions.canPlaceVer (currentNode.getData().getGrid(),r,col)){
+    					Functions.placeOption(currentNode.getData().getGrid(),r,col,r + 1,col,currentNode);
+    					Functions.removeOption (currentNode.getData().getGrid(),Functions.getLastoptionrow1(),Functions.getLastoptioncol1(),Functions.getLastoptionrow2(),Functions.getLastoptioncol2());
+    				}
+    			}
+    		}
+    		for (int j = 0;j < Functions.getTree().getRoot().getNumberOfChildren() - 1;j++){
+    			int one = Functions.getTree().getRoot().getChildAt(j).getData().getRowOne();
+    			int two = Functions.getTree().getRoot().getChildAt(j).getData().getRowTwo();
+    			int three =  Functions.getTree().getRoot().getChildAt(j).getData().getColOne();
+    			int four = Functions.getTree().getRoot().getChildAt(j).getData().getColTwo();
+    			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
+    		}
+    		
+    		//auxBuildTree(currentNode,row,onCol);
+    		return false;
+    	}
+         
+        else if(currentNode.hasChildren()) {
+            i = 0;
+            System.out.println("So i am in here?");
+            while(i < currentNode.getNumberOfChildren()) {
+            	System.out.println("Grid in node: \n");
+            	for(int k = 0; k < Functions.getNumofrows(); k++)
+				   {
+				      for(int j = 0; j < Functions.getNumofcols(); j++)
+				      {
+				    	  
+				         System.out.printf("%5d ", currentNode.getChildAt(i).getData().getGrid()[k][j]);
+				      }
+				      
+				      System.out.println();
+				   }
+				 System.out.println("\n");
+            	for (int r = row;r <= Functions.getNumofrows() - 1;r++){
+        			for (int col = onCol; col < Functions.getNumofcols() - 1;col++){
+        				if (Functions.canPlaceHor (currentNode.getChildAt(i).getData().getGrid(),r,col)){
+          					Functions.placeOption(currentNode.getChildAt(i).getData().getGrid(),r,col,r,col + 1,currentNode);
+        					Functions.removeOption (currentNode.getChildAt(i).getData().getGrid(),Functions.getLastoptionrow1(),Functions.getLastoptioncol1(),Functions.getLastoptionrow2(),Functions.getLastoptioncol2());
+        				}
+        			}
+        		}
+        		for (int col = onCol; col <= Functions.getNumofcols() - 1; col++){
+        			for (int r = row; r < Functions.getNumofrows() - 1; r++){
+        				if (Functions.canPlaceVer (currentNode.getChildAt(i).getData().getGrid(),r,col)){
+        					Functions.placeOption(currentNode.getChildAt(i).getData().getGrid(),r,col,r + 1,col,currentNode);
+        					Functions.removeOption (currentNode.getChildAt(i).getData().getGrid(),Functions.getLastoptionrow1(),Functions.getLastoptioncol1(),Functions.getLastoptionrow2(),Functions.getLastoptioncol2());
+        				}
+        			}
+        		}
+        		i++;
+               auxBuildTree(currentNode.getChildAt(i),row,onCol);
+                
+            }
+        }
+		return false;
+
+       
+    }
 
     public boolean isEmpty() {
         return (root == null);
