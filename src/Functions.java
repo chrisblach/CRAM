@@ -17,15 +17,13 @@ public class Functions {
 	
 	private static int [][] grid = new int[][] {};
 	private static Option optionroot = new Option (grid,0,0,0,0,false);
-	private static Option option = new Option(grid,0,0,0,0,false);
+	
 	private static GenericTree<Option> tree = new GenericTree<Option>();
 
 	private static int [][] tempgrid = new int[][] {};
 
 	public static int number = 0;
 	public static void solve (int row, int onCol){
-		int something = tempgrid [0][0];
-		System.out.println(tempgrid [0][0]);
 	boolean hi;
 	hi = tree.buildTree(getTree().getRoot(),row,onCol);
 	if (hi){
@@ -57,31 +55,21 @@ public class Functions {
 	}
 
 	public static void placeOption (int currentgrid [][], int row1, int col1, int row2, int col2, GenericTreeNode <Option> optionNode){
-		currentgrid [row1][col1] = 1;
-		currentgrid [row2][col2] = 1;
-		option.setGrid(currentgrid);
+		int [][] myInt = new int[5][];
+		for(int i = 0; i < 5; i++)
+		    myInt[i] = currentgrid[i].clone();
+		myInt [row1][col1] = 1;
+		myInt [row2][col2] = 1;
+		Option option = new Option(myInt,row1,col1,row2,col2,false);
 		GenericTreeNode <Option> optionnode =  new GenericTreeNode<Option>(option);
 		optionNode.addChild(optionnode);
-		for(int k = 0; k < Functions.getNumofrows(); k++)
-		   {
-		      for(int j = 0; j < Functions.getNumofcols(); j++)
-		      {
-		    	  
-		         System.out.printf("%5d ", tree.getRoot().getChildAt(0).getData().getGrid()[k][j]);
-		      }
-		      
-		      System.out.println();
-		   }
-		   
-		 
-
 		setLastoptionrow1(row1);
 		setLastoptioncol1(col1);
 		setLastoptionrow2(row2);
 		setLastoptioncol2(col2);
 		combinations++;
-		try {
-			Thread.sleep(250);
+		/*try {
+			Thread.sleep(0);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,21 +78,21 @@ public class Functions {
 		   {
 		      for(int j = 0; j < numofcols; j++)
 		      {
-		         System.out.printf("%5d ", currentgrid[i][j]);
+		         System.out.printf("%5d ", myInt[i][j]);
 		      }
 		      
 		      System.out.println();
 		   }
 	      System.out.println("\n");
-	     System.out.println(combinations);
+	     System.out.println(combinations);*/
 	}
 	
 	public static void removeOption (int currentgrid [][], int row1, int col1, int row2, int col2){
 		currentgrid [row1][col1] = 0;
 		currentgrid [row2][col2] = 0;
 		 System.out.println("REMOVE:");
-		 try {
-			Thread.sleep(250);
+		 /*try {
+			Thread.sleep(0);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,7 +107,7 @@ public class Functions {
 		      
 		      System.out.println();
 		   }
-		 System.out.println("\n");
+		 System.out.println("\n");*/
 	}
 	
 	public static boolean canPlaceHor (int currentgrid [][], int row, int col){

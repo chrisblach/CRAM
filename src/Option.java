@@ -1,6 +1,6 @@
 
 public class Option {
-	private static int [][] grid = new int[][] { 
+	private int [][] grid = new int[][] { 
 		
 		{0,0,0,0,0},
 		{0,0,0,0,0},
@@ -36,6 +36,10 @@ public class Option {
 
 
 	public int[][] getGrid() {
+		//int [][] myInt = new int[5][];
+		//for(int i = 0; i < 5; i++)
+		//    myInt[i] = grid[i].clone();
+		//return myInt;
 		return grid;
 	}
 

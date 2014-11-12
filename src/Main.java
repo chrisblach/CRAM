@@ -15,16 +15,16 @@ public class Main {
 	{
 		grid = new int[][] { 
 				
-				{1,0,0,0,0},
 				{0,0,0,0,0},
 				{0,0,0,0,0},
-				{1,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
 				{0,0,0,0,0}
 						
 				};		
 		Functions.setGrid(grid);
-		int numofrows = 2;
-		int numofcols = 3; 
+		int numofrows = 4;
+		int numofcols = 4; 
 		Functions.setNumofcols(numofcols);
 		Functions.setNumofrows(numofrows);
 		Option optionroot = new Option (grid,0,0,0,0,false);
@@ -54,19 +54,22 @@ public class Main {
 		
 		System.out.println("Grid in node: \n");
 		int i = 0;
-		// while(i < tree.getRoot().getNumberOfChildren()) {
+		while(i < tree.getRoot().getNumberOfChildren()) {
+	
     	for(int k = 0; k < Functions.getNumofrows(); k++)
 		   {
 		      for(int j = 0; j < Functions.getNumofcols(); j++)
 		      {
 		    	  
-		         System.out.printf("%5d ", tree.getRoot().getChildAt(0).getData().getGrid()[k][j]);
+		         System.out.printf("%5d ", tree.getRoot().getChildAt(i).getData().getGrid()[k][j]);
 		      }
 		      
 		      System.out.println();
+		     
 		   }
-		   
-		// }
+    	 System.out.println("\n");
+		   i++;
+		 }
 
 
 	}
