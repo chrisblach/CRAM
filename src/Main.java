@@ -1,5 +1,3 @@
-import java.util.concurrent.TimeUnit;
-
 public class Main {
 	
 	private static int [][] grid = new int[][] { 
@@ -26,7 +24,7 @@ public class Main {
 						
 				};		
 		Functions.setGrid(grid);
-		int numofrows = 2;
+		int numofrows = 3;
 		int numofcols = 3; 
 		Functions.setNumofcols(numofcols);
 		Functions.setNumofrows(numofrows);
@@ -43,7 +41,6 @@ public class Main {
 		
 		
 		Functions.solve(0,0);
-		System.out.println("Done");
 		//Functions.solvecram (0, 0);
 		/*int number = tree.getNumberOfNodes();
 		System.out.println("Number of node : " + number);

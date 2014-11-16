@@ -73,14 +73,15 @@ public class GenericTree<T> {
     public boolean buildTree (GenericTreeNode<Option> startnode,int row,int col) {
     	
         if(root != null) {
-         return auxBuildTree(startnode,row,col);
+        auxBuildTree(startnode,row,col);
+        return true;
         }
 		return false;
 
      
     }
     
-    private boolean auxBuildTree (GenericTreeNode<Option> currentNode, int row, int onCol) {
+    private void auxBuildTree (GenericTreeNode<Option> currentNode, int row, int onCol) {
         int i = 0;
         if (currentNode.equals(root) && !currentNode.hasChildren()) {
         	System.out.println("Am i still in here for some reason?");
@@ -108,13 +109,12 @@ public class GenericTree<T> {
     			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
     		}
     		*/
-    		auxBuildTree(currentNode,row,onCol);
-    		return false;
+    		
     	}
-         
-        else if(currentNode.hasChildren()) {
-            i = 0;
-            System.out.println("So i am in here?");
+        i = 0;
+      if (currentNode.hasChildren()) {
+           
+           // System.out.println("So i am in here?");
             while(i < currentNode.getNumberOfChildren()) {
             	/*System.out.println("Grid in node: \n");
             	for(int k = 0; k < Functions.getNumofrows(); k++)
@@ -145,13 +145,15 @@ public class GenericTree<T> {
     			}
     		}
         		i++;
-        		if (i > currentNode.getNumberOfChildren())
-               auxBuildTree(currentNode.getChildAt(i),row,onCol);
+        		if (i > currentNode.getNumberOfChildren()){
+               //auxBuildTree(currentNode.getChildAt(i),row,onCol);
+        			currentNode = currentNode.getChildAt(i); 
+        		}
                 
             }
+            
         }
-		return false;
-
+		
        
     }
 

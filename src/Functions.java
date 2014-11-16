@@ -111,18 +111,29 @@ public class Functions {
 	}
 	
 	public static boolean canPlaceHor (int currentgrid [][], int row, int col){
+		if (row > 4 || col >= 4){
+			
+		}
+		else{
 		if (currentgrid [row][col] == 0 && currentgrid [row] [col + 1] == 0){
 			return true;
 		}
-		else return false;
+		}
+		 return false;
+		
 		
 	}
 	
 	public static boolean canPlaceVer (int currentgrid [][], int row, int col){
+		if (row >= 4 || col >4){
+			
+		}
+		else {
 		if (currentgrid [row][col] == 0 && currentgrid [row + 1] [col] == 0){
 			return true;
 		}
-		else return false;
+		}
+	 return false;
 		
 	}
 	
