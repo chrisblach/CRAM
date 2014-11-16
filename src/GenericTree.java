@@ -82,24 +82,22 @@ public class GenericTree<T> {
     
     private boolean auxBuildTree (GenericTreeNode<Option> currentNode, int row, int onCol) {
         int i = 0;
-        //if (!currentNode.equals(root) && currentNode.getNumberOfChildren() == 0){
-        	//System.out.println(currentNode.getNumberOfChildren());
-        	//return true;
-       // }
         if (currentNode.equals(root) && !currentNode.hasChildren()) {
         	System.out.println("Am i still in here for some reason?");
         	for (int r = row;r <= Functions.getNumofrows() - 1;r++){
-    			for (int col = onCol; col < Functions.getNumofcols() - 1;col++){
+    			for (int col = onCol; col <= Functions.getNumofcols() - 1;col++){
     				if (Functions.canPlaceHor (currentNode.getData().getGrid(),r,col)){
-    					Functions.placeOption(currentNode.getData().getGrid(),r,col,r,col + 1, currentNode);
+        					if (col == Functions.getNumofcols() - 1){
+        						
+        					}
+        					else Functions.placeOption(currentNode.getData().getGrid(),r,col,r,col + 1, currentNode);
     				}
-    			}
-    		}
-    		for (int col = onCol; col <= Functions.getNumofcols() - 1; col++){
-    			for (int r = row; r < Functions.getNumofrows() - 1; r++){
     				if (Functions.canPlaceVer (currentNode.getData().getGrid(),r,col)){
-    					Functions.placeOption(currentNode.getData().getGrid(),r,col,r + 1,col,currentNode);
+    					if (r == Functions.getNumofrows() - 1){
+    						
     					}
+    					else Functions.placeOption(currentNode.getData().getGrid(),r,col,r + 1,col,currentNode);
+    				}
     			}
     		}
     		/*for (int j = 0;j < Functions.getTree().getRoot().getNumberOfChildren() - 1;j++){
@@ -131,19 +129,21 @@ public class GenericTree<T> {
 				   }
 				 System.out.println("\n");*/
             	for (int r = row;r <= Functions.getNumofrows() - 1;r++){
-        			for (int col = onCol; col < Functions.getNumofcols() - 1;col++){
+        			for (int col = onCol; col <= Functions.getNumofcols() - 1;col++){
         				if (Functions.canPlaceHor (currentNode.getChildAt(i).getData().getGrid(),r,col)){
-          					Functions.placeOption(currentNode.getChildAt(i).getData().getGrid(),r,col,r,col + 1,currentNode);
-        				}
-        			}
-        		}
-        		for (int col = onCol; col <= Functions.getNumofcols() - 1; col++){
-        			for (int r = row; r < Functions.getNumofrows() - 1; r++){
-        				if (Functions.canPlaceVer (currentNode.getChildAt(i).getData().getGrid(),r,col)){
-        					Functions.placeOption(currentNode.getChildAt(i).getData().getGrid(),r,col,r + 1,col,currentNode);
-        				}
-        			}
-        		}
+        					if (col == Functions.getNumofcols() - 1){
+        						
+        					}
+        					else Functions.placeOption(currentNode.getChildAt(i).getData().getGrid(),r,col,r,col + 1, currentNode);
+    				}
+    				if (Functions.canPlaceVer (currentNode.getChildAt(i).getData().getGrid(),r,col)){
+    					if (r == Functions.getNumofrows() - 1){
+    						
+    					}
+    					else Functions.placeOption(currentNode.getChildAt(i).getData().getGrid(),r,col,r + 1,col,currentNode);
+    				}
+    			}
+    		}
         		i++;
         		if (i > currentNode.getNumberOfChildren())
                auxBuildTree(currentNode.getChildAt(i),row,onCol);

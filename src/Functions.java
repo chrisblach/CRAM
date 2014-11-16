@@ -7,7 +7,7 @@ public class Functions {
 	private static int numofrows = 2;
 	private static int numofcols = 3;
 	private static int temp = 0;
-	private static int combinations = 0;
+	static int combinations = 0;
 	private static int combinationstemp = 0;
 
 	private static int lastoptionrow1;

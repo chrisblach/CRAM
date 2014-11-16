@@ -18,16 +18,16 @@ public class Main {
 		
 		grid = new int[][] { 
 				
-				{1,1,1,0,0},
-				{1,1,1,1,0},
-				{1,1,1,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
 				{0,0,0,0,0},
 				{0,0,0,0,0}
 						
 				};		
 		Functions.setGrid(grid);
-		int numofrows = 5;
-		int numofcols = 5; 
+		int numofrows = 2;
+		int numofcols = 3; 
 		Functions.setNumofcols(numofcols);
 		Functions.setNumofrows(numofrows);
 		Option optionroot = new Option (grid,0,0,0,0,false);
@@ -55,8 +55,8 @@ public class Main {
 			int four = tree.getRoot().getChildAt(i).getData().getColTwo();
 			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
 		}*/	
-		
-		/*System.out.println("Grid in node: \n");
+		System.out.println(Functions.combinations);
+		System.out.println("Grid in node: \n");
 		int i = 0;
 		while(i < tree.getRoot().getNumberOfChildren()) {
 	
@@ -74,7 +74,7 @@ public class Main {
     	 System.out.println("\n");
 		   i++;
 		 }
-*/
+
 
 	}
 
