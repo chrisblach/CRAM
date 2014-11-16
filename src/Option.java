@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 
 public class Option {
 	private int [][] grid = new int[][] {};
@@ -63,5 +65,10 @@ public class Option {
 
 	public void setColTwo(int colTwo) {
 		this.colTwo = colTwo;
+	}
+	
+	public String toString(){
+		return Arrays.deepToString(this.grid) + ", " + this.rowOne + ", " 
+				+ this.rowTwo + ", " + this.colOne + ", " + this.colTwo;
 	}
 }
