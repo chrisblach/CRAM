@@ -275,7 +275,74 @@ public class playerMain {
 			// NOTE ALONG WITH THE GIVE BOARD ... THE PREVIOUS MOVE IS AVAILABLE IN STRING previousMove
 			//
 			////////////////////////////////////////////////////////
+		 byte [][] grid2 = new byte[][] { 
+				
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0}
+						
+				};
+			int row = 0;
+			int col = 0;
+			for (int i = 1; i <= boardAsString.length(); i++){
+				
+				//temp = 5*row;
+				if (boardAsString.charAt(i - 1) == 'M'){
+				grid2 [row][col] = 1;
+				}
+				col++;
+				if ((i % 5) == 0){
+					row++;
+					col = 0;
+				}
+			}
 			
+			Functions.setGrid(grid2);
+			int numofrows = 3;
+			int numofcols = 3; 
+			Functions.setNumofcols(numofcols);
+			Functions.setNumofrows(numofrows);
+			Option optionroot = new Option (grid2,0,0,0,0,false);
+			Functions.setOptionroot(optionroot);
+		 	GenericTree<Option> tree = new GenericTree<Option>();
+		 	Functions.setTree(tree);
+			GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
+			Functions.getTree().setRoot(root);
+			Functions.solve(0, 0);
+			
+			for(int i = 0; i < 5; i++)
+			   {
+			      for(int j = 0; j < 5; j++)
+			      {
+			         System.out.printf("%5d ", grid2[i][j]);
+			      }
+			      
+			      System.out.println();
+			   }
+		      System.out.println("\n");
+		      
+		     /* System.out.println("Grid in node: \n");
+				int i = 0;
+				while(i < Functions.getTree().getRoot().getNumberOfChildren()) {
+			
+		    	for(int k = 0; k < Functions.getNumofrows(); k++)
+				   {
+				      for(int j = 0; j < Functions.getNumofcols(); j++)
+				      {
+				    	  
+				         System.out.printf("%5d ", Functions.getTree().getRoot().getChildAt(i).getData().getGrid()[k][j]);
+				      }
+				      
+				      System.out.println();
+				     
+				   }
+		    	 System.out.println("\n");
+				   i++;
+				 }
+		*/
+					
 			System.out.println("Enter move (for testing, to be replaced with algorithm):");
 			playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
 			

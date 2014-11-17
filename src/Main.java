@@ -16,15 +16,15 @@ public class Main {
 		
 		grid = new byte[][] { 
 				
+				{1,1,1,1,0},
+				{1,1,1,0,0},
 				{0,0,0,0,0},
-				{0,0,0,0,0},
-				{0,0,0,0,0},
-				{0,0,0,0,0},
+				{0,1,0,0,0},
 				{0,0,0,0,0}
 						
 				};		
 		Functions.setGrid(grid);
-		int numofrows = 4;
+		int numofrows = 5;
 		int numofcols = 5; 
 		Functions.setNumofcols(numofcols);
 		Functions.setNumofrows(numofrows);
