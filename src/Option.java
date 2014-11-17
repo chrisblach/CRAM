@@ -1,6 +1,6 @@
 
 public class Option {
-	private int [][] grid = new int[][] { 
+	private byte [][] grid = new byte[][] { 
 		
 		{0,0,0,0,0},
 		{0,0,0,0,0},
@@ -16,7 +16,7 @@ public class Option {
 	private int win;
 	
 	
-	public Option (int currentgrid [][], int row1, int col1, int row2, int col2, boolean condition){
+	public Option (byte currentgrid [][], int row1, int col1, int row2, int col2, boolean condition){
 		setGrid (currentgrid);
 		setRowOne (row1);
 		setRowTwo (row2);
@@ -35,7 +35,7 @@ public class Option {
 	}
 
 
-	public int[][] getGrid() {
+	public byte[][] getGrid() {
 		//int [][] myInt = new int[5][];
 		//for(int i = 0; i < 5; i++)
 		//    myInt[i] = grid[i].clone();
@@ -44,7 +44,7 @@ public class Option {
 	}
 
 
-	public void setGrid(int[][] grid) {
+	public void setGrid(byte[][] grid) {
 		this.grid = grid;
 	}
 

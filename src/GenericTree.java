@@ -116,6 +116,10 @@ public class GenericTree<T> {
            
            // System.out.println("So i am in here?");
             while(i < currentNode.getNumberOfChildren()) {
+            	if (root.getChildAt(1).getData() == currentNode.getData()){
+            		
+            	}
+            	else{
             	/*System.out.println("Grid in node: \n");
             	for(int k = 0; k < Functions.getNumofrows(); k++)
 				   {
@@ -153,6 +157,8 @@ public class GenericTree<T> {
             }
             
         }
+            
+      }
 		
        
     }

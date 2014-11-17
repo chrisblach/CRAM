@@ -1,6 +1,6 @@
 public class Main {
 	
-	private static int [][] grid = new int[][] { 
+	private static byte [][] grid = new byte[][] { 
 			
 			{0,0,0,0,0},
 			{0,0,0,0,0},
@@ -14,7 +14,7 @@ public class Main {
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		
-		grid = new int[][] { 
+		grid = new byte[][] { 
 				
 				{0,0,0,0,0},
 				{0,0,0,0,0},
@@ -24,8 +24,8 @@ public class Main {
 						
 				};		
 		Functions.setGrid(grid);
-		int numofrows = 3;
-		int numofcols = 3; 
+		int numofrows = 4;
+		int numofcols = 5; 
 		Functions.setNumofcols(numofcols);
 		Functions.setNumofrows(numofrows);
 		Option optionroot = new Option (grid,0,0,0,0,false);
@@ -53,7 +53,7 @@ public class Main {
 			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
 		}*/	
 		System.out.println(Functions.combinations);
-		System.out.println("Grid in node: \n");
+		/*System.out.println("Grid in node: \n");
 		int i = 0;
 		while(i < tree.getRoot().getNumberOfChildren()) {
 	
@@ -71,7 +71,7 @@ public class Main {
     	 System.out.println("\n");
 		   i++;
 		 }
-
+*/
 
 	}
 

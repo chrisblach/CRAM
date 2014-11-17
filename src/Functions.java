@@ -15,12 +15,12 @@ public class Functions {
 	private static int lastoptionrow2;
 	private static int lastoptioncol2;
 	
-	private static int [][] grid = new int[][] {};
+	private static byte [][] grid = new byte[][] {};
 	private static Option optionroot = new Option (grid,0,0,0,0,false);
 	
 	private static GenericTree<Option> tree = new GenericTree<Option>();
 
-	private static int [][] tempgrid = new int[][] {};
+	private static byte [][] tempgrid = new byte[][] {};
 
 	public static int number = 0;
 	public static void solve (int row, int onCol){
@@ -30,7 +30,7 @@ public class Functions {
 		System.out.println("Done");
 	}
 }
-	public static boolean solvecram (int row, int onCol){
+	/*public static boolean solvecram (int row, int onCol){
 		return Functions.solvecram (grid, 0, 0);
 	}
 	private static boolean solvecram (int currentgrid [][], int row,int onCol)	{
@@ -52,10 +52,10 @@ public class Functions {
 		}
 		
 		return false;	
-	}
+	}*/
 
-	public static void placeOption (int currentgrid [][], int row1, int col1, int row2, int col2, GenericTreeNode <Option> optionNode){
-		int [][] myInt = new int[5][];
+	public static void placeOption (byte currentgrid [][], int row1, int col1, int row2, int col2, GenericTreeNode <Option> optionNode){
+		byte [][] myInt = new byte[5][];
 		for(int i = 0; i < 5; i++)
 		    myInt[i] = currentgrid[i].clone();
 		myInt [row1][col1] = 1;
@@ -87,7 +87,7 @@ public class Functions {
 	     System.out.println(combinations);*/
 	}
 	
-	public static void removeOption (int currentgrid [][], int row1, int col1, int row2, int col2){
+	public static void removeOption (byte currentgrid [][], int row1, int col1, int row2, int col2){
 		currentgrid [row1][col1] = 0;
 		currentgrid [row2][col2] = 0;
 		 System.out.println("REMOVE:");
@@ -110,7 +110,7 @@ public class Functions {
 		 System.out.println("\n");*/
 	}
 	
-	public static boolean canPlaceHor (int currentgrid [][], int row, int col){
+	public static boolean canPlaceHor (byte currentgrid [][], int row, int col){
 		if (row > 4 || col >= 4){
 			
 		}
@@ -124,7 +124,7 @@ public class Functions {
 		
 	}
 	
-	public static boolean canPlaceVer (int currentgrid [][], int row, int col){
+	public static boolean canPlaceVer (byte currentgrid [][], int row, int col){
 		if (row >= 4 || col >4){
 			
 		}
@@ -187,19 +187,19 @@ public class Functions {
 		Functions.tree = tree;
 	}
 	
-	public static int[][] getGrid() {
+	public static byte[][] getGrid() {
 		return grid;
 	}
 	
-	public static void setGrid(int[][] grid) {
+	public static void setGrid(byte[][] grid) {
 		Functions.grid = grid;
 		setTempgrid(grid);
 	}
 	
-	public static int[][] getTempgrid() {
+	public static byte[][] getTempgrid() {
 		return tempgrid;
 	}
-	public static void setTempgrid(int[][] tempgrid) {
+	public static void setTempgrid(byte[][] tempgrid) {
 		Functions.tempgrid = tempgrid;
 	}
 }
