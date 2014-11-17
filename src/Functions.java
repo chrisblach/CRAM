@@ -1,39 +1,130 @@
 import java.util.*;
+import java.util.Map.Entry;
 import java.lang.*;
 import java.io.*;
 
 public class Functions {
 
-	private static int numofrows = 2;
-	private static int numofcols = 3;
-	private static int temp = 0;
-	static int combinations = 0;
-	private static int combinationstemp = 0;
+	private  int numofrows = 2;
+	private  int numofcols = 3;
+	private  int temp = 0;
+	 int combinations = 0;
+	private  int combinationstemp = 0;
 
-	private static int lastoptionrow1;
-	private static int lastoptioncol1;
-	private static int lastoptionrow2;
-	private static int lastoptioncol2;
+	private  int lastoptionrow1;
+	private  int lastoptioncol1;
+	private  int lastoptionrow2;
+	private  int lastoptioncol2;
 	
-	private static int [][] grid = new int[][] {};
-	private static Option optionroot = new Option (grid,0,0,0,0,false);
+	private byte [][] gridInit = new byte[][] { 
+		
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0}
+				
+		};
 	
-	private static GenericTree<Option> tree = new GenericTree<Option>();
+	private  gridArrayClass grid = new gridArrayClass(gridInit);
+	private  Option optionroot = new Option (grid,0,0,0,0,false);
+	
+	private  GenericTree<Option> tree = new GenericTree<Option>();
 
-	private static int [][] tempgrid = new int[][] {};
+	private  gridArrayClass tempgrid = new gridArrayClass(gridInit);
 
-	public static int number = 0;
-	public static void solve (int row, int onCol){
-	boolean hi;
-	hi = tree.buildTree(getTree().getRoot(),row,onCol);
+	public  int number = 0;
+	
+	private int doneCount = 0;
+	private int gridArrayLength = 1;
+	
+	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+	boolean hi = false;
+	//hi = tree.buildTree(getTree().getRoot(),row,onCol);
+	
+	buildHash(allGrids);
+	hi = true;
 	if (hi){
 		System.out.println("Done");
 	}
 }
-	public static boolean solvecram (int row, int onCol){
-		return Functions.solvecram (grid, 0, 0);
+	
+	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+        	for (int r = 0;r <= this.getNumofrows() - 1;r++){
+    			for (int col = 0; col <= this.getNumofcols() - 1;col++){
+    				if (this.canPlaceHor (grid,r,col)){
+        					if (col == this.getNumofcols() - 1){
+        						
+        					}
+        					else this.placeOption(grid,r,col,r,col + 1, allGrids);
+    				}
+    				if (this.canPlaceVer (grid,r,col)){
+    					if (r == this.getNumofrows() - 1){
+    						
+    					}
+    					else this.placeOption(grid,r,col,r + 1,col, allGrids);
+    				}
+    			}
+    		}
+        		fillHash(allGrids);
+    	}
+	
+	@SuppressWarnings("unchecked")
+	public void fillHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){         
+		while (this.doneCount < this.gridArrayLength){
+			System.out.println(this.doneCount + " is less than " + this.gridArrayLength);
+			Object[] gridArray = allGrids.keySet().toArray();
+			this.gridArrayLength = gridArray.length;
+			this.doneCount = 0;
+			for(int i = 0; i < this.gridArrayLength; i++) {
+				//System.out.println("i is" + i);
+				if (allGrids.get(gridArray[i]).peekFirst() == null)
+				{
+					//System.out.println(i + " is null ");
+					boolean placed = false;
+					for (int r = 0;r <= this.getNumofrows() - 1;r++){
+						for (int col = 0; col <= this.getNumofcols() - 1;col++){
+							if (this.canPlaceHor ((gridArrayClass)gridArray[i],r,col)){
+								if (col == this.getNumofcols() - 1){
+									//System.out.println("Not placing");
+								}
+								else
+									{
+									placed = true;
+									this.placeOption((gridArrayClass)gridArray[i],r,col,r,col + 1, allGrids);
+									}
+							}
+							if (this.canPlaceVer ((gridArrayClass)gridArray[i],r,col)){
+								if (r == this.getNumofrows() - 1){
+									//System.out.println("Not placing 2");
+								}
+								else
+								{
+									placed = true;
+									this.placeOption((gridArrayClass)gridArray[i],r,col,r + 1,col, allGrids);
+								}
+							}
+						}
+					}
+					if (!placed)
+					{
+						Option option = new Option((gridArrayClass)gridArray[i],0,0,0,0,true);
+						allGrids.get(gridArray[i]).add(option);
+					}
+				}
+				else
+				{
+					//System.out.println(i + " is not null");
+					this.doneCount++;
+				}
+			}
+		}
 	}
-	private static boolean solvecram (int currentgrid [][], int row,int onCol)	{
+	
+	/*public  boolean solvecram (int row, int onCol){
+		return this.solvecram (grid, 0, 0);
+	}
+	private  boolean solvecram (int currentgrid [][], int row,int onCol)	{
 		for (int r = row;r <= numofrows - 1;r++){
 			for (int col = onCol; col < numofcols - 1;col++){
 				if (canPlaceHor (currentgrid,r,col)){
@@ -52,17 +143,35 @@ public class Functions {
 		}
 		
 		return false;	
-	}
+	}*/
 
-	public static void placeOption (int currentgrid [][], int row1, int col1, int row2, int col2, GenericTreeNode <Option> optionNode){
-		int [][] myInt = new int[5][];
+	public  void placeOption (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+		byte [][] myIntInit = new byte[][]
+				{ 
+				
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0}
+						
+				};
+		gridArrayClass myInt = new gridArrayClass(myIntInit);
 		for(int i = 0; i < 5; i++)
-		    myInt[i] = currentgrid[i].clone();
-		myInt [row1][col1] = 1;
-		myInt [row2][col2] = 1;
+		    myInt.grid[i] = currentgrid.grid[i].clone();
+		myInt.grid [row1][col1] = 1;
+		myInt.grid [row2][col2] = 1;
 		Option option = new Option(myInt,row1,col1,row2,col2,false);
-		GenericTreeNode <Option> optionnode =  new GenericTreeNode<Option>(option);
-		optionNode.addChild(optionnode);
+		if (allGrids.get(myInt) != null)
+		{
+			allGrids.get(currentgrid).add(option);
+		}
+		else
+		{
+			allGrids.get(currentgrid).add(option);
+			LinkedList<Option> newGrid = new LinkedList<Option>();
+			allGrids.put(myInt, newGrid);
+		}
 		setLastoptionrow1(row1);
 		setLastoptioncol1(col1);
 		setLastoptionrow2(row2);
@@ -87,7 +196,7 @@ public class Functions {
 	     System.out.println(combinations);*/
 	}
 	
-	public static void removeOption (int currentgrid [][], int row1, int col1, int row2, int col2){
+	public  void removeOption (byte currentgrid [][], int row1, int col1, int row2, int col2){
 		currentgrid [row1][col1] = 0;
 		currentgrid [row2][col2] = 0;
 		 System.out.println("REMOVE:");
@@ -110,96 +219,95 @@ public class Functions {
 		 System.out.println("\n");*/
 	}
 	
-	public static boolean canPlaceHor (int currentgrid [][], int row, int col){
+	public  boolean canPlaceHor (gridArrayClass currentgrid, int row, int col){
 		if (row > 4 || col >= 4){
-			
-		}
+			   
+		 }
 		else{
-		if (currentgrid [row][col] == 0 && currentgrid [row] [col + 1] == 0){
+		if (currentgrid.grid [row][col] == 0 && currentgrid.grid [row] [col + 1] == 0){
 			return true;
 		}
 		}
-		 return false;
-		
+		return false;
 		
 	}
 	
-	public static boolean canPlaceVer (int currentgrid [][], int row, int col){
+	public  boolean canPlaceVer (gridArrayClass currentgrid, int row, int col){
 		if (row >= 4 || col >4){
-			
-		}
-		else {
-		if (currentgrid [row][col] == 0 && currentgrid [row + 1] [col] == 0){
+			   
+		  }
+		else{
+		if (currentgrid.grid [row][col] == 0 && currentgrid.grid [row + 1] [col] == 0){
 			return true;
 		}
 		}
-	 return false;
+		return false;
 		
 	}
 	
-	public static int getNumofrows() {
+	public  int getNumofrows() {
 		return numofrows;
 	}
-	public static void setNumofrows(int numofrows) {
-		Functions.numofrows = numofrows;
+	public  void setNumofrows(int numofrows) {
+		this.numofrows = numofrows;
 	}
-	public static int getNumofcols() {
+	public  int getNumofcols() {
 		return numofcols;
 	}
-	public static void setNumofcols(int numofcols) {
-		Functions.numofcols = numofcols;
+	public  void setNumofcols(int numofcols) {
+		this.numofcols = numofcols;
 	}
-	public static int getLastoptionrow1() {
+	public  int getLastoptionrow1() {
 		return lastoptionrow1;
 	}
-	public static void setLastoptionrow1(int lastoptionrow1) {
-		Functions.lastoptionrow1 = lastoptionrow1;
+	public  void setLastoptionrow1(int lastoptionrow1) {
+		this.lastoptionrow1 = lastoptionrow1;
 	}
-	public static int getLastoptioncol1() {
+	public  int getLastoptioncol1() {
 		return lastoptioncol1;
 	}
-	public static void setLastoptioncol1(int lastoptioncol1) {
-		Functions.lastoptioncol1 = lastoptioncol1;
+	public  void setLastoptioncol1(int lastoptioncol1) {
+		this.lastoptioncol1 = lastoptioncol1;
 	}
-	public static int getLastoptionrow2() {
+	public  int getLastoptionrow2() {
 		return lastoptionrow2;
 	}
-	public static void setLastoptionrow2(int lastoptionrow2) {
-		Functions.lastoptionrow2 = lastoptionrow2;
+	public  void setLastoptionrow2(int lastoptionrow2) {
+		this.lastoptionrow2 = lastoptionrow2;
 	}
-	public static int getLastoptioncol2() {
+	public  int getLastoptioncol2() {
 		return lastoptioncol2;
 	}
-	public static void setLastoptioncol2(int lastoptioncol2) {
-		Functions.lastoptioncol2 = lastoptioncol2;
+	public  void setLastoptioncol2(int lastoptioncol2) {
+		this.lastoptioncol2 = lastoptioncol2;
 	}
 	
-	public static Option getOptionroot() {
+	public  Option getOptionroot() {
 		return optionroot;
 	}
-	public static void setOptionroot(Option optionroot) {
-		Functions.optionroot = optionroot;
+	public  void setOptionroot(Option optionroot) {
+		this.optionroot = optionroot;
 	}
-	public static GenericTree<Option> getTree() {
+	public  GenericTree<Option> getTree() {
 		return tree;
 	}
-	public static void setTree(GenericTree<Option> tree) {
-		Functions.tree = tree;
+	public  void setTree(GenericTree<Option> tree) {
+		this.tree = tree;
 	}
 	
-	public static int[][] getGrid() {
+	public  gridArrayClass getGrid() {
 		return grid;
 	}
 	
-	public static void setGrid(int[][] grid) {
-		Functions.grid = grid;
+	public  void setGrid(gridArrayClass grid) {
+		this.grid = grid;
 		setTempgrid(grid);
 	}
 	
-	public static int[][] getTempgrid() {
+	public  gridArrayClass getTempgrid() {
 		return tempgrid;
 	}
-	public static void setTempgrid(int[][] tempgrid) {
-		Functions.tempgrid = tempgrid;
+	public  void setTempgrid(gridArrayClass tempgrid) {
+		this.tempgrid = tempgrid;
 	}
 }

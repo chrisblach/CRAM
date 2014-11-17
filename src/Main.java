@@ -1,46 +1,53 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
 	
-	private static int [][] grid = new int[][] { 
+	private static byte [][] gridInit = new byte[][] { 
 			
+			{1,1,0,0,0},
+			{0,1,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
+			{0,0,1,0,0}
 					
 			};
 	
+	private static gridArrayClass grid = new gridArrayClass(gridInit);
 	
+	
+	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		
-		grid = new int[][] { 
-				
-				{0,0,0,0,0},
-				{0,0,0,0,0},
-				{0,0,0,0,0},
-				{0,0,0,0,0},
-				{0,0,0,0,0}
-						
-				};		
-		Functions.setGrid(grid);
-		int numofrows = 3;
-		int numofcols = 3; 
-		Functions.setNumofcols(numofcols);
-		Functions.setNumofrows(numofrows);
-		Option optionroot = new Option (grid,0,0,0,0,false);
+		Functions functionsInstance = new Functions();
+		functionsInstance.setGrid(grid);
+		int numofrows = 5;
+		int numofcols = 5; 
+		functionsInstance.setNumofcols(numofcols);
+		functionsInstance.setNumofrows(numofrows);
+		/*Option optionroot = new Option (grid,0,0,0,0,false);
 		Functions.setOptionroot(optionroot);
 	 	GenericTree<Option> tree = new GenericTree<Option>();
 	 	Functions.setTree(tree);
 		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
-		Functions.getTree().setRoot(root);
+		Functions.getTree().setRoot(root);*/
+		
+		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+		LinkedList<Option> startGridList = new LinkedList<Option>();
+		allGrids.put(grid, startGridList);
 		
 		
 		
 		
-		
-		
-		Functions.solve(0,0);
+		functionsInstance.solve(allGrids);
+		System.out.println("Done");
 		//Functions.solvecram (0, 0);
 		/*int number = tree.getNumberOfNodes();
 		System.out.println("Number of node : " + number);
@@ -52,9 +59,10 @@ public class Main {
 			int four = tree.getRoot().getChildAt(i).getData().getColTwo();
 			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
 		}*/	
-		System.out.println(Functions.combinations);
+		System.out.println(functionsInstance.combinations);
 		System.out.println("Grid in node: \n");
-		int i = 0;
+		
+		/*int i = 0;
 		while(i < tree.getRoot().getNumberOfChildren()) {
 	
     	for(int k = 0; k < Functions.getNumofrows(); k++)
@@ -70,8 +78,19 @@ public class Main {
 		   }
     	 System.out.println("\n");
 		   i++;
-		 }
+		 }*/
 
+		// Get a set of the entries
+		Set<?> set = allGrids.entrySet();
+		// Get an iterator
+		Iterator<?> i = set.iterator();
+		// Display elements
+		while(i.hasNext()) {
+			Map.Entry<gridArrayClass, LinkedList<Option>> me = (Map.Entry<gridArrayClass, LinkedList<Option>>)i.next();
+			System.out.print(me.getKey() + ": ");
+			System.out.println(me.getValue());
+		}
+		System.out.println(allGrids.size());
 
 	}
 
