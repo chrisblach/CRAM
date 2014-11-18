@@ -7,10 +7,10 @@ public class Option {
 	private int rowTwo;
 	private int colOne;
 	private int colTwo;
-	private int win;
 	
 	
-	public Option (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, boolean condition){
+	
+	public Option (gridArrayClass currentgrid, int row1, int col1, int row2, int col2){
 		setGrid (currentgrid);
 		setRowOne (row1);
 		setRowTwo (row2);
@@ -19,14 +19,7 @@ public class Option {
 	}
 
 
-	public int getWin() {
-		return win;
-	}
 
-
-	public void setWin(int win) {
-		this.win = win;
-	}
 
 
 	public gridArrayClass getGrid() {
@@ -83,7 +76,7 @@ public class Option {
 	}
 	
 	public String toString(){
-		return Arrays.deepToString(this.grid.grid) + ", " + this.rowOne + ", " 
-				+ this.rowTwo + ", " + this.colOne + ", " + this.colTwo + ", " + this.win;
+		return "\n" + this.grid.toString() + ", " + this.rowOne + ", " 
+				+ this.rowTwo + ", " + this.colOne + ", " + this.colTwo;
 	}
 }

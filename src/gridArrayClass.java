@@ -1,11 +1,20 @@
-import java.util.Arrays;
-
 public class gridArrayClass {
   byte grid[][];
+  boolean win;
 
-  public gridArrayClass( byte b[][] ) {
+  public gridArrayClass( byte b[][], boolean condition ) {
      grid = b;
+     setWin(condition);
   }
+  
+	public boolean getWin() {
+		return win;
+	}
+
+
+	public void setWin(boolean win) {
+		this.win = win;
+	}
 
   public int hashCode() {
     //int hash = 0;
@@ -33,6 +42,22 @@ public class gridArrayClass {
   }
   
   public String toString(){
-		return Arrays.deepToString(this.grid);
+		//return Arrays.deepToString(this.grid);
+	  String returnString = "";
+	  for (int i = 0; i < Main.numofrows; i++){
+		  returnString += "[";
+		  for (int j = 0; j < Main.numofcols; j++){
+			  returnString += grid[i][j];
+			  if (j != Main.numofcols - 1){
+				  returnString += ", ";
+			  }
+		  }
+		  if (i != Main.numofrows - 1){
+			  returnString += "]\n";
+		  }
+	  }
+	  returnString += "]";
+	  returnString += win;
+	  return returnString;
 	}
 }

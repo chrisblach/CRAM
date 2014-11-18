@@ -26,12 +26,12 @@ public class Functions {
 				
 		};
 	
-	private  gridArrayClass grid = new gridArrayClass(gridInit);
-	private  Option optionroot = new Option (grid,0,0,0,0,false);
+	private  gridArrayClass grid = new gridArrayClass(gridInit, true);
+	private  Option optionroot = new Option (grid,0,0,0,0);
 	
 	private  GenericTree<Option> tree = new GenericTree<Option>();
 
-	private  gridArrayClass tempgrid = new gridArrayClass(gridInit);
+	private  gridArrayClass tempgrid = new gridArrayClass(gridInit, true);
 
 	public  int number = 0;
 	
@@ -108,8 +108,12 @@ public class Functions {
 					}
 					if (!placed)
 					{
-						Option option = new Option((gridArrayClass)gridArray[i],0,0,0,0,true);
+						//System.out.println("Not placed");
+						Option option = new Option((gridArrayClass)gridArray[i],0,0,0,0);
 						allGrids.get(gridArray[i]).add(option);
+						((gridArrayClass) gridArray[i]).setWin(false);
+						//this.placeOption((gridArrayClass)gridArray[i],0,0,0,0, allGrids);
+						//allGrids.get(gridArray[i]).get(0).setWin(true);
 					}
 				}
 				else
@@ -118,6 +122,37 @@ public class Functions {
 					this.doneCount++;
 				}
 			}
+		}
+		processHash(allGrids);
+	}
+	
+	public void processHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+		System.out.println("Processing Hashes");
+		Object[] gridArray = allGrids.keySet().toArray();
+		this.gridArrayLength = gridArray.length;
+		for(int i = 0; i < this.gridArrayLength; i++) {
+			System.out.println("Processing " + (i + 1) + " of " + gridArray.length + " keys/grids.");
+			LinkedList<Option> keyGridList = allGrids.get(gridArray[i]);
+			boolean allWin = true;
+				for (int j = 0; j < keyGridList.size(); j++)
+				{
+					for (int k = 0; k < this.gridArrayLength; k++)
+					{
+						if (keyGridList.get(j).getGrid().equals(((gridArrayClass) gridArray[k])))
+						{
+							if(keyGridList.get(j).getGrid().getWin() != ((gridArrayClass) gridArray[k]).getWin()){
+								keyGridList.get(j).getGrid().setWin(false);
+							}
+						}
+						if (!keyGridList.get(j).getGrid().getWin())
+						{
+							allWin = false;
+						}
+					}
+				}
+				if (allWin){
+					((gridArrayClass) gridArray[i]).setWin(false);
+				}
 		}
 	}
 	
@@ -156,12 +191,12 @@ public class Functions {
 				{0,0,0,0,0}
 						
 				};
-		gridArrayClass myInt = new gridArrayClass(myIntInit);
+		gridArrayClass myInt = new gridArrayClass(myIntInit, true);
 		for(int i = 0; i < 5; i++)
 		    myInt.grid[i] = currentgrid.grid[i].clone();
 		myInt.grid [row1][col1] = 1;
 		myInt.grid [row2][col2] = 1;
-		Option option = new Option(myInt,row1,col1,row2,col2,false);
+		Option option = new Option(myInt,row1,col1,row2,col2);
 		if (allGrids.get(myInt) != null)
 		{
 			allGrids.get(currentgrid).add(option);

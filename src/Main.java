@@ -11,15 +11,16 @@ public class Main {
 	private static byte [][] gridInit = new byte[][] { 
 			
 			{1,1,0,0,0},
-			{0,1,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
-			{0,0,1,0,0}
+			{0,0,0,0,0},
+			{0,0,0,0,0}
 					
 			};
 	
-	private static gridArrayClass grid = new gridArrayClass(gridInit);
-	
+	private static gridArrayClass grid = new gridArrayClass(gridInit, true);
+	static int numofrows = 5;
+	static int numofcols = 5; 
 	
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws java.lang.Exception
@@ -27,8 +28,8 @@ public class Main {
 		
 		Functions functionsInstance = new Functions();
 		functionsInstance.setGrid(grid);
-		int numofrows = 5;
-		int numofcols = 5; 
+		//static int numofrows = 2;
+		//static int numofcols = 2; 
 		functionsInstance.setNumofcols(numofcols);
 		functionsInstance.setNumofrows(numofrows);
 		/*Option optionroot = new Option (grid,0,0,0,0,false);
@@ -87,10 +88,10 @@ public class Main {
 		// Display elements
 		while(i.hasNext()) {
 			Map.Entry<gridArrayClass, LinkedList<Option>> me = (Map.Entry<gridArrayClass, LinkedList<Option>>)i.next();
-			System.out.print(me.getKey() + ": ");
-			System.out.println(me.getValue());
+			System.out.print("\n\n" + me.getKey() + ": ");
+			System.out.print(me.getValue());
 		}
-		System.out.println(allGrids.size());
+		System.out.println("\n\n" + allGrids.size());
 
 	}
 
