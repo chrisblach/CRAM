@@ -39,16 +39,81 @@ public class Functions {
 	private int gridArrayLength = 1;
 	
 	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
-	boolean hi = false;
-	//hi = tree.buildTree(getTree().getRoot(),row,onCol);
-	
-	buildHash(allGrids);
-	hi = true;
-	if (hi){
-		System.out.println("Done");
+		boolean done = false;	
+		buildHash(allGrids);
+		done = true;
+		if (done){
+			System.out.println("Done Making Hash Map... Now Making Tree...");
+		}
+		
+		this.setOptionroot(allGrids.get(grid).get(0));
+	 	GenericTree<Option> tree = new GenericTree<Option>();
+	 	this.setTree(tree);
+		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(this.getOptionroot());
+		this.getTree().setRoot(root);
+		GenericTreeNode <Option> currentNode =  new GenericTreeNode<Option>(this.getOptionroot());
+		currentNode = tree.getRoot();
+		//solveTree(allGrids, currentNode);
+		System.out.println("Done Tree... Now Solving...");
+		System.out.println(allGrids.size());
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*List<GenericTreeNode<Option>> result;
+		GenericTree gTree = new GenericTree();
+		result = gTree.build(tree.getRoot(), GenericTreeTraversalOrderEnum.PRE_ORDER);
+		System.out.println(result);*/
 	}
-}
 	
+	private void solveTree(HashMap<gridArrayClass, LinkedList<Option>> allGrids, GenericTreeNode<Option> currentNode){
+		int i3 = 0;
+		gridArrayClass tempGA = new gridArrayClass (tree.getRoot().getData().getGrid().grid);
+		/*int test = tree.getRoot().getNumberOfChildren();
+		System.out.println(test);*/
+		
+		if (!tree.getRoot().hasChildren()){
+			for (int i = 0 ; i < allGrids.get(tree.getRoot().getData().getGrid()).size() ; i++){
+				//currentNode.setData(allGrids.get();
+				/*System.out.println("Test");*/
+				GenericTreeNode <Option> rootNodes =  new GenericTreeNode<Option>(allGrids.get(this.optionroot.getGrid()).get(i));
+				currentNode.addChild(rootNodes);
+			}
+		
+		}
+		Option breakCondition = new Option((gridArrayClass)currentNode.getData().getGrid(),0,0,0,0,true);
+		if (currentNode.getData().getWin()){
+			/*System.out.println("Did i get in here?");*/
+		}
+		else{
+		i3 = 0;
+		if (currentNode.hasChildren()) {
+			while (i3 < currentNode.getNumberOfChildren()){
+				
+				
+            	
+			/*	System.out.println("i is " + i3);*/
+				for (int j = 0 ; j < allGrids.get(currentNode.getChildAt(i3).getData().getGrid()).size() ; j++){
+				/*	System.out.println("Size " + allGrids.get(currentNode.getChildAt(i3).getData().getGrid()).size() + " j is " + j);*/
+					GenericTreeNode <Option> nodes =  new GenericTreeNode<Option>(allGrids.get(currentNode.getChildAt(i3).getData().getGrid()).get(j));
+					currentNode.getChildAt(i3).addChild(nodes);
+					
+				}
+				
+				
+				solveTree (allGrids, currentNode.getChildAt(i3));
+				i3++;
+					
+				
+			}
+			
+		}
+			
+		}	
+}
+
 	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
     			for (int col = 0; col <= this.getNumofcols() - 1;col++){
@@ -120,6 +185,7 @@ public class Functions {
 			}
 		}
 	}
+	
 	
 	/*public  boolean solvecram (int row, int onCol){
 		return this.solvecram (grid, 0, 0);

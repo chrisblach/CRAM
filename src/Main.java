@@ -10,8 +10,8 @@ public class Main {
 	
 	private static byte [][] gridInit = new byte[][] { 
 			
-			{1,1,0,0,0},
-			{0,1,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
 			{0,0,1,0,0}
@@ -31,12 +31,7 @@ public class Main {
 		int numofcols = 5; 
 		functionsInstance.setNumofcols(numofcols);
 		functionsInstance.setNumofrows(numofrows);
-		/*Option optionroot = new Option (grid,0,0,0,0,false);
-		Functions.setOptionroot(optionroot);
-	 	GenericTree<Option> tree = new GenericTree<Option>();
-	 	Functions.setTree(tree);
-		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
-		Functions.getTree().setRoot(root);*/
+		
 		
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 
@@ -47,8 +42,13 @@ public class Main {
 		
 		
 		functionsInstance.solve(allGrids);
-		System.out.println("Done");
-		//Functions.solvecram (0, 0);
+		
+		
+		//Option optionroot = new Option (grid,0,0,0,0,false);
+		
+		
+		
+		
 		/*int number = tree.getNumberOfNodes();
 		System.out.println("Number of node : " + number);
 		tree.getRoot().getNumberOfChildren();*/
@@ -62,24 +62,57 @@ public class Main {
 		System.out.println(functionsInstance.combinations);
 		System.out.println("Grid in node: \n");
 		
-		/*int i = 0;
-		while(i < tree.getRoot().getNumberOfChildren()) {
+		//int l = 0;
+		//while(l < tree.getRoot().getNumberOfChildren()) {
 	
-    	for(int k = 0; k < Functions.getNumofrows(); k++)
+    	for(int k = 0; k < functionsInstance.getNumofrows(); k++)
 		   {
-		      for(int j = 0; j < Functions.getNumofcols(); j++)
+		      for(int j = 0; j < functionsInstance.getNumofcols(); j++)
 		      {
 		    	  
-		         System.out.printf("%5d ", tree.getRoot().getChildAt(i).getData().getGrid()[k][j]);
+		         System.out.printf("%5d ", functionsInstance.getTree().getRoot().getData().getGrid().grid [k][j]);
 		      }
 		      
 		      System.out.println();
 		     
 		   }
     	 System.out.println("\n");
-		   i++;
-		 }*/
-
+		  // l++;
+		// }
+    	 
+    	int l = 0;
+ 		while(l <  functionsInstance.getTree().getRoot().getNumberOfChildren()) {
+ 	
+     	for(int k = 0; k < functionsInstance.getNumofrows(); k++)
+ 		   {
+ 		      for(int j = 0; j < functionsInstance.getNumofcols(); j++)
+ 		      {
+ 		    	  
+ 		         System.out.printf("%5d ",  functionsInstance.getTree().getRoot().getChildAt(l).getData().getGrid().grid [k][j]);
+ 		      }
+ 		      
+ 		      System.out.println();
+ 		     
+ 		   }
+     	 System.out.println("\n");
+ 		   l++;
+ 		 }
+ 	int s = 0;
+ 		while(s<  functionsInstance.getTree().getRoot().getNumberOfChildren()) {
+ 		 System.out.println("THIS IS THE GRID: \n");
+		for(int k = 0; k < functionsInstance.getNumofrows(); k++)
+		   {
+		      for(int a= 0; a < functionsInstance.getNumofcols(); a++)
+		      {
+		    	  
+		         System.out.printf("%5d ", functionsInstance.getTree().getRoot().getChildAt(s).getChildAt(0).getData().getGrid().grid [k][a]);
+		      }
+		      
+		      System.out.println();
+		     
+		   }
+	s++;
+ 	}
 		// Get a set of the entries
 		Set<?> set = allGrids.entrySet();
 		// Get an iterator

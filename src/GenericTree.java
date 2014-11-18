@@ -73,7 +73,18 @@ public class GenericTree<T> {
     public boolean isEmpty() {
         return (root == null);
     }
+    public void buildTree() {
 
+        if(root != null) {
+           buildTree(root);
+        }
+
+ 
+    }
+
+    private void buildTree (GenericTreeNode<T> node) {
+       
+    }
     public List<GenericTreeNode<T>> build(GenericTreeTraversalOrderEnum traversalOrder) {
         List<GenericTreeNode<T>> returnList = null;
 

@@ -7,11 +7,23 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 
 
 public class playerMain {
-	
+	private static byte [][] gridInit = new byte[][] { 
+		
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0}
+				
+		};
+
+	private static gridArrayClass grid = new gridArrayClass(gridInit);
 	// The client socket
 		private static Socket clientSocket = null;
 		// The output stream
@@ -31,7 +43,7 @@ public class playerMain {
 		private static String turn;
 		private static String boardAsString;
 		private static String previousMove;
-			
+		static String theMove;	
 		public static void main(String[] args) throws UnknownHostException, IOException{
 			
 			//////////////////////////////////////////////////
@@ -275,10 +287,89 @@ public class playerMain {
 			// NOTE ALONG WITH THE GIVE BOARD ... THE PREVIOUS MOVE IS AVAILABLE IN STRING previousMove
 			//
 			////////////////////////////////////////////////////////
-			
+					int row = 0;
+					int col = 0;
+					for (int i = 1; i <= boardAsString.length(); i++){
+						
+						//temp = 5*row;
+						if (boardAsString.charAt(i - 1) == 'M'){
+						gridInit [row][col] = 1;
+						}
+						col++;
+						if ((i % 5) == 0){
+							row++;
+							col = 0;
+						}
+					}
+					Functions f = new Functions ();
+					f.setGrid(grid);
+					int numofrows = 2;
+					int numofcols = 3; 
+					f.setNumofcols(numofcols);
+					f.setNumofrows(numofrows);
+					HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+					LinkedList<Option> startGridList = new LinkedList<Option>();
+					allGrids.put(grid, startGridList);
+					
+					//f.solve(allGrids);
+					int moveRow1 = (1) + 1;
+					int moveRow2 = (2) + 1;
+					int moveCol1 = (3) + 1;
+					int moveCol2 = (3) + 1;
+				
+					 switch (moveCol1) {
+					  	case 1:
+					  		theMove = "A" + moveRow1;
+					  		break;
+					  	case 2:
+					  		theMove = "B" + moveRow1;
+					  		break;
+					 	case 3:
+					 		theMove = "C" + moveRow1;
+					 		break;
+					 	case 4:
+					 		theMove = "D" + moveRow1;
+					 		break;
+					 	case 5:
+					 		theMove = "E" + moveRow1;
+					 		break;
+					}
+					 
+					switch (moveCol2) {
+					  	case 1:
+					  		theMove += "A" + moveRow2;
+					  		break;
+					  	case 2:
+					  		theMove += "B" + moveRow2;
+					  		break;
+					 	case 3:
+					 		theMove += "C" + moveRow2;
+					 		break;
+					 	case 4:
+					 		theMove += "D" + moveRow2;
+					 		break;
+					 	case 5:
+					 		theMove += "E" + moveRow2;
+					 		break;
+					}
+					
+					System.out.println(theMove);
+					
+					for(int i = 0; i < 5; i++)
+					   {
+					      for(int j = 0; j < 5; j++)
+					      {
+					         System.out.printf("%5d ", gridInit[i][j]);
+					      }
+					      
+					      System.out.println();
+					   }
+				      System.out.println("\n");
+				      
 			System.out.println("Enter move (for testing, to be replaced with algorithm):");
-			playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
-			
+			//playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
+			playerMove = theMove;
 			
 			
 			//////////////////////////////////////////////////////

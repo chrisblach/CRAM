@@ -7,7 +7,7 @@ public class Option {
 	private int rowTwo;
 	private int colOne;
 	private int colTwo;
-	private int win;
+	private boolean win;
 	
 	
 	public Option (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, boolean condition){
@@ -16,15 +16,16 @@ public class Option {
 		setRowTwo (row2);
 		setColOne (col1);
 		setColTwo (col2);
+		setWin (condition);
 	}
 
 
-	public int getWin() {
+	public boolean getWin() {
 		return win;
 	}
 
 
-	public void setWin(int win) {
+	public void setWin(boolean win) {
 		this.win = win;
 	}
 
