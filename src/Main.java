@@ -18,9 +18,11 @@ public class Main {
 					
 			};
 	
-	private static gridArrayClass grid = new gridArrayClass(gridInit, true);
+	private static gridArrayClass grid = new gridArrayClass(gridInit, true, false);
 	static int numofrows = 5;
 	static int numofcols = 5; 
+	
+	static HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 	
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws java.lang.Exception
@@ -42,6 +44,7 @@ public class Main {
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 
 		LinkedList<Option> startGridList = new LinkedList<Option>();
+		allGridsKeys.put(grid, grid);
 		allGrids.put(grid, startGridList);
 		
 		

@@ -26,12 +26,12 @@ public class Functions {
 				
 		};
 	
-	private  gridArrayClass grid = new gridArrayClass(gridInit, true);
+	private  gridArrayClass grid = new gridArrayClass(gridInit, true, false);
 	private  Option optionroot = new Option (grid,0,0,0,0);
 	
 	private  GenericTree<Option> tree = new GenericTree<Option>();
 
-	private  gridArrayClass tempgrid = new gridArrayClass(gridInit, true);
+	private  gridArrayClass tempgrid = new gridArrayClass(gridInit, true, false);
 
 	public  int number = 0;
 	
@@ -131,29 +131,109 @@ public class Functions {
 		Object[] gridArray = allGrids.keySet().toArray();
 		this.gridArrayLength = gridArray.length;
 		for(int i = 0; i < this.gridArrayLength; i++) {
+			//if (((gridArrayClass) gridArray[i]).getProcessed()){
+			//	System.out.println("Processing " + (i + 1) + " already completed.");
+			//}
+			//else
+			//{
 			System.out.println("Processing " + (i + 1) + " of " + gridArray.length + " keys/grids.");
 			LinkedList<Option> keyGridList = allGrids.get(gridArray[i]);
 			boolean allWin = true;
 				for (int j = 0; j < keyGridList.size(); j++)
 				{
-					for (int k = 0; k < this.gridArrayLength; k++)
-					{
-						if (keyGridList.get(j).getGrid().equals(((gridArrayClass) gridArray[k])))
-						{
-							if(keyGridList.get(j).getGrid().getWin() != ((gridArrayClass) gridArray[k]).getWin()){
+					//for (int k = 0; k < this.gridArrayLength; k++)
+					//{
+						//if (keyGridList.get(j).getGrid().equals(((gridArrayClass) gridArray[k])))
+						//{
+					
+							//if(keyGridList.get(j).getGrid().getWin() != ((gridArrayClass) gridArray[k]).getWin()){
+								if(keyGridList.get(j).getGrid().getWin() != playerMain.allGridsKeys.get(((gridArrayClass) gridArray[i])).getWin()){
 								keyGridList.get(j).getGrid().setWin(false);
+								//((gridArrayClass) gridArray[k]).setProcessed(true);
 							}
-						}
+								//playerMain.allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(true);
+						//}
 						if (!keyGridList.get(j).getGrid().getWin())
 						{
 							allWin = false;
 						}
-					}
+						//((gridArrayClass) gridArray[k]).setProcessed(true);
+					//}
 				}
 				if (allWin){
 					((gridArrayClass) gridArray[i]).setWin(false);
 				}
+				//((gridArrayClass) gridArray[i]).setProcessed(true);
+		//}
 		}
+	}
+	
+	public String findMove (HashMap<gridArrayClass, LinkedList<Option>> allGrids, gridArrayClass currentBoard){
+		String theMove = "";
+		int moveRow1 = 1;
+		int moveRow2 = 1;
+		int moveCol1 = 1;
+		int moveCol2 = 1;
+		boolean canWin = playerMain.allGridsKeys.get(currentBoard).getWin();
+		
+		if(canWin){
+			//Search for L's
+			LinkedList<Option> keyGridList = allGrids.get(currentBoard);
+			for (int i = 0; i < keyGridList.size(); i++){
+				if(!keyGridList.get(i).getGrid().getWin()){
+					moveRow1 += (keyGridList.get(i).getRowOne());
+					moveRow2 += (keyGridList.get(i).getRowTwo());
+					moveCol1 += (keyGridList.get(i).getColOne());
+					moveCol2 += (keyGridList.get(i).getColTwo());
+					break;
+				}
+			}
+		}
+		else{
+			//Pick any child
+			moveRow1 += (allGrids.get(currentBoard).get(0).getRowOne());
+			moveRow2 += (allGrids.get(currentBoard).get(0).getRowTwo());
+			moveCol1 += (allGrids.get(currentBoard).get(0).getColOne());
+			moveCol2 += (allGrids.get(currentBoard).get(0).getColTwo());
+		}
+	
+		 switch (moveCol1) {
+		  	case 1:
+		  		theMove = "A" + moveRow1;
+		  		break;
+		  	case 2:
+		  		theMove = "B" + moveRow1;
+		  		break;
+		 	case 3:
+		 		theMove = "C" + moveRow1;
+		 		break;
+		 	case 4:
+		 		theMove = "D" + moveRow1;
+		 		break;
+		 	case 5:
+		 		theMove = "E" + moveRow1;
+		 		break;
+		}
+		 
+		switch (moveCol2) {
+		  	case 1:
+		  		theMove += "A" + moveRow2;
+		  		break;
+		  	case 2:
+		  		theMove += "B" + moveRow2;
+		  		break;
+		 	case 3:
+		 		theMove += "C" + moveRow2;
+		 		break;
+		 	case 4:
+		 		theMove += "D" + moveRow2;
+		 		break;
+		 	case 5:
+		 		theMove += "E" + moveRow2;
+		 		break;
+		}
+		
+		return theMove;
 	}
 	
 	/*public  boolean solvecram (int row, int onCol){
@@ -191,7 +271,7 @@ public class Functions {
 				{0,0,0,0,0}
 						
 				};
-		gridArrayClass myInt = new gridArrayClass(myIntInit, true);
+		gridArrayClass myInt = new gridArrayClass(myIntInit, true, false);
 		for(int i = 0; i < 5; i++)
 		    myInt.grid[i] = currentgrid.grid[i].clone();
 		myInt.grid [row1][col1] = 1;
@@ -205,6 +285,7 @@ public class Functions {
 		{
 			allGrids.get(currentgrid).add(option);
 			LinkedList<Option> newGrid = new LinkedList<Option>();
+			playerMain.allGridsKeys.put(myInt, myInt);
 			allGrids.put(myInt, newGrid);
 		}
 		setLastoptionrow1(row1);

@@ -7,11 +7,25 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 
 
 public class playerMain {
+	private static byte [][] gridInit = new byte[][] { 
+		
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0}
+				
+		};
+
+	private static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
 	
+	static HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 	// The client socket
 		private static Socket clientSocket = null;
 		// The output stream
@@ -31,7 +45,7 @@ public class playerMain {
 		private static String turn;
 		private static String boardAsString;
 		private static String previousMove;
-			
+		static String theMove;	
 		public static void main(String[] args) throws UnknownHostException, IOException{
 			
 			//////////////////////////////////////////////////
@@ -275,10 +289,54 @@ public class playerMain {
 			// NOTE ALONG WITH THE GIVE BOARD ... THE PREVIOUS MOVE IS AVAILABLE IN STRING previousMove
 			//
 			////////////////////////////////////////////////////////
-			
+					int row = 0;
+					int col = 0;
+					for (int i = 1; i <= boardAsString.length(); i++){
+						
+						//temp = 5*row;
+						if (boardAsString.charAt(i - 1) == 'M' || boardAsString.charAt(i - 1) == 'R' || boardAsString.charAt(i - 1) == 'B'){
+						gridInit [row][col] = 1;
+						}
+						col++;
+						if ((i % 5) == 0){
+							row++;
+							col = 0;
+						}
+					}
+					Functions f = new Functions ();
+					f.setGrid(grid);
+					int numofrows = 2;
+					int numofcols = 3;
+					f.setNumofcols(numofcols);
+					f.setNumofrows(numofrows);
+					
+					HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+					LinkedList<Option> startGridList = new LinkedList<Option>();
+					allGridsKeys.put(grid, grid);
+					allGrids.put(grid, startGridList);
+					
+					f.solve(allGrids);
+					System.out.println("Done");
+					
+					theMove = f.findMove(allGrids, grid);
+					
+					System.out.println(theMove);
+					
+					for(int i = 0; i < 5; i++)
+					   {
+					      for(int j = 0; j < 5; j++)
+					      {
+					         System.out.printf("%5d ", gridInit[i][j]);
+					      }
+					      
+					      System.out.println();
+					   }
+				      System.out.println("\n");
+				      
 			System.out.println("Enter move (for testing, to be replaced with algorithm):");
-			playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
-			
+			//playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
+			playerMove = theMove;
 			
 			
 			//////////////////////////////////////////////////////
@@ -288,5 +346,4 @@ public class playerMain {
 			return playerMove;
 			
 		}
-		
 }
