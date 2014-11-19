@@ -112,6 +112,7 @@ public class Functions {
 						Option option = new Option((gridArrayClass)gridArray[i],0,0,0,0);
 						allGrids.get(gridArray[i]).add(option);
 						((gridArrayClass) gridArray[i]).setWin(false);
+						((gridArrayClass) gridArray[i]).setProcessed(true);
 						//this.placeOption((gridArrayClass)gridArray[i],0,0,0,0, allGrids);
 						//allGrids.get(gridArray[i]).get(0).setWin(true);
 					}
@@ -130,41 +131,48 @@ public class Functions {
 		System.out.println("Processing Hashes");
 		Object[] gridArray = allGrids.keySet().toArray();
 		this.gridArrayLength = gridArray.length;
-		for(int i = 0; i < this.gridArrayLength; i++) {
-			//if (((gridArrayClass) gridArray[i]).getProcessed()){
-			//	System.out.println("Processing " + (i + 1) + " already completed.");
-			//}
-			//else
-			//{
-			System.out.println("Processing " + (i + 1) + " of " + gridArray.length + " keys/grids.");
-			LinkedList<Option> keyGridList = allGrids.get(gridArray[i]);
-			boolean allWin = true;
-				for (int j = 0; j < keyGridList.size(); j++)
-				{
-					//for (int k = 0; k < this.gridArrayLength; k++)
-					//{
-						//if (keyGridList.get(j).getGrid().equals(((gridArrayClass) gridArray[k])))
-						//{
-					
-							//if(keyGridList.get(j).getGrid().getWin() != ((gridArrayClass) gridArray[k]).getWin()){
-								if(keyGridList.get(j).getGrid().getWin() != playerMain.allGridsKeys.get(((gridArrayClass) gridArray[i])).getWin()){
-								keyGridList.get(j).getGrid().setWin(false);
-								//((gridArrayClass) gridArray[k]).setProcessed(true);
+		int totalProcessed = 0;
+		while (totalProcessed < gridArray.length){
+			totalProcessed = 0;
+			for(int i = 0; i < this.gridArrayLength; i++) {
+				if (i % 10000 == 0){
+					System.out.println("Processing " + (i + 1) + " of " + gridArray.length + " keys/grids.");
+				}
+				if (!Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).getProcessed()){
+					LinkedList<Option> keyGridList = allGrids.get(gridArray[i]);
+					int winCount = 0;
+					int processedCount = 0;
+					for (int j = 0; j < keyGridList.size(); j++)
+					{
+						if(Main.allGridsKeys.get(keyGridList.get(j).getGrid()).getProcessed()){
+							keyGridList.get(j).getGrid().setProcessed(true);
+							processedCount++;
+							if(keyGridList.get(j).getGrid().getWin() != Main.allGridsKeys.get(keyGridList.get(j).getGrid()).getWin()){
+								keyGridList.get(j).getGrid().setWin(Main.allGridsKeys.get(keyGridList.get(j).getGrid()).getWin());
 							}
-								//playerMain.allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(true);
-						//}
-						if (!keyGridList.get(j).getGrid().getWin())
-						{
-							allWin = false;
+							if (keyGridList.get(j).getGrid().getWin()){
+								winCount++;
+							}
 						}
-						//((gridArrayClass) gridArray[k]).setProcessed(true);
-					//}
+					}
+					if (processedCount == keyGridList.size()){
+						if (winCount == keyGridList.size()){
+							Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setWin(false);
+						}
+						else{
+							Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setWin(true);
+						}
+						Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(true);
+					}
+					else{
+						Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(false);
+					}
 				}
-				if (allWin){
-					((gridArrayClass) gridArray[i]).setWin(false);
+				else{
+					totalProcessed++;
 				}
-				//((gridArrayClass) gridArray[i]).setProcessed(true);
-		//}
+			}
+			System.out.println("Total processed: " + totalProcessed + ", Size: " + gridArray.length);
 		}
 	}
 	
@@ -174,7 +182,7 @@ public class Functions {
 		int moveRow2 = 1;
 		int moveCol1 = 1;
 		int moveCol2 = 1;
-		boolean canWin = playerMain.allGridsKeys.get(currentBoard).getWin();
+		boolean canWin = Main.allGridsKeys.get(currentBoard).getWin();
 		
 		if(canWin){
 			//Search for L's
@@ -285,7 +293,7 @@ public class Functions {
 		{
 			allGrids.get(currentgrid).add(option);
 			LinkedList<Option> newGrid = new LinkedList<Option>();
-			playerMain.allGridsKeys.put(myInt, myInt);
+			Main.allGridsKeys.put(myInt, myInt);
 			allGrids.put(myInt, newGrid);
 		}
 		setLastoptionrow1(row1);

@@ -10,10 +10,10 @@ public class Main {
 	
 	private static byte [][] gridInit = new byte[][] { 
 			
-			{1,1,0,0,0},
 			{0,0,0,0,0},
+			{0,0,0,1,0},
 			{0,0,0,0,0},
-			{0,0,0,0,0},
+			{0,1,0,0,0},
 			{0,0,0,0,0}
 					
 			};
@@ -63,8 +63,7 @@ public class Main {
 			int four = tree.getRoot().getChildAt(i).getData().getColTwo();
 			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
 		}*/	
-		System.out.println(functionsInstance.combinations);
-		System.out.println("Grid in node: \n");
+		System.out.println("Possible Moves: " + functionsInstance.combinations);
 		
 		/*int i = 0;
 		while(i < tree.getRoot().getNumberOfChildren()) {
@@ -84,7 +83,9 @@ public class Main {
 		   i++;
 		 }*/
 
-		// Get a set of the entries
+		System.out.println(allGridsKeys.get(grid));
+		
+		/*// Get a set of the entries
 		Set<?> set = allGrids.entrySet();
 		// Get an iterator
 		Iterator<?> i = set.iterator();
@@ -93,8 +94,13 @@ public class Main {
 			Map.Entry<gridArrayClass, LinkedList<Option>> me = (Map.Entry<gridArrayClass, LinkedList<Option>>)i.next();
 			System.out.print("\n\n" + me.getKey() + ": ");
 			System.out.print(me.getValue());
-		}
-		System.out.println("\n\n" + allGrids.size());
+		}*/
+		
+		System.out.println("Unique Boards: " + allGrids.size());
+		
+		String theMove = functionsInstance.findMove(allGrids, grid);
+		
+		System.out.println(theMove);
 
 	}
 

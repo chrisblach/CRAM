@@ -66,7 +66,8 @@ public class gridArrayClass {
 		  }
 	  }
 	  returnString += "]";
-	  returnString += win;
+	  returnString += "W: " + win;
+	  returnString += ", P: " + processed;
 	  return returnString;
 	}
 }
