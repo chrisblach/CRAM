@@ -1,5 +1,7 @@
 public class gridArrayClass {
-  byte grid[][];
+  
+
+byte grid[][];
   boolean win;
   boolean processed;
 
@@ -69,5 +71,13 @@ public class gridArrayClass {
 	  returnString += "W: " + win;
 	  returnString += ", P: " + processed;
 	  return returnString;
+	}
+  
+  public byte[][] getGrid() {
+		return grid;
+	}
+
+	public void setGrid(byte[][] grid) {
+		this.grid = grid;
 	}
 }

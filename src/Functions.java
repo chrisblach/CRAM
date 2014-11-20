@@ -368,7 +368,63 @@ public class Functions {
 		return false;
 		
 	}
+	public ArrayList<gridArrayClass> masterMoves (){
+	 byte [][] gridTest = new byte[][] { 
+				
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0}
+						
+				};
 	
+		int keyrow = 0;
+		int keycol= 0;
+		int mastercomb = 0;
+		int start = 0;
+		int doneRow = 0;
+		ArrayList<gridArrayClass> allMasters = new ArrayList <gridArrayClass>();
+	for (int g = 1 ;g < (this.numofrows*this.numofcols) ;g++){
+		gridTest [keyrow][keycol] = 1;
+		for (int i = doneRow; i < this.numofrows ; i++){
+			if (i == doneRow + 1){
+				start = 0;
+			}
+			for (int j = start; j < this.numofcols ;j++){
+				if (keyrow == i && keycol == j){
+				//don't compute this one
+				}
+				else{
+					gridTest [i][j] = 1;
+					allMasters.add(new gridArrayClass (gridTest,true,false));
+					System.out.println(allMasters.get(0));
+					 gridTest [i][j] = 0; 
+					 mastercomb ++;
+				}
+			}
+		}
+		gridTest [keyrow][keycol] = 0;
+		if (g % this.numofcols == 0){
+			keyrow++;
+			keycol = 0;
+			doneRow ++;
+		}
+		else{
+			keycol++;
+		}
+		if (start % this.numofcols + 1 == 0){
+		start += 2;
+		}
+		
+		start = start + (g % this.numofcols);
+		if (start == 6){
+			start -= 2;
+		}
+		
+	}
+	return allMasters;
+}
 	public  int getNumofrows() {
 		return numofrows;
 	}

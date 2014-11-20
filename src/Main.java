@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -11,9 +13,9 @@ public class Main {
 	private static byte [][] gridInit = new byte[][] { 
 			
 			{0,0,0,0,0},
-			{0,0,0,1,0},
 			{0,0,0,0,0},
-			{0,1,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
 			{0,0,0,0,0}
 					
 			};
@@ -26,14 +28,33 @@ public class Main {
 	
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws java.lang.Exception
-	{
-		
+	{		
+		ArrayList<gridArrayClass> allMasters = new ArrayList <gridArrayClass>();
 		Functions functionsInstance = new Functions();
-		functionsInstance.setGrid(grid);
-		//static int numofrows = 2;
-		//static int numofcols = 2; 
 		functionsInstance.setNumofcols(numofcols);
 		functionsInstance.setNumofrows(numofrows);
+		allMasters = functionsInstance.masterMoves();
+		System.out.println(allMasters.get(299));
+		/*for(int k = 0; k < numofrows; k++)
+		   {
+		      for(int L = 0; L < numofcols; L++)
+		      {
+		         System.out.printf("%5d ", allMasters.get(1)[k][L]);
+		      }
+		      
+		      System.out.println();
+		   }*/
+	int i = 301;
+	while (i < allMasters.size()){
+		
+		
+		//grid.setGrid(allMasters.get(i));
+		System.out.print("THIS IS THE GRID" + allMasters.get(i));
+		functionsInstance.setGrid(grid);
+		
+		//static int numofrows = 2;
+		//static int numofcols = 2; 
+		
 		/*Option optionroot = new Option (grid,0,0,0,0,false);
 		Functions.setOptionroot(optionroot);
 	 	GenericTree<Option> tree = new GenericTree<Option>();
@@ -52,36 +73,8 @@ public class Main {
 		
 		functionsInstance.solve(allGrids);
 		System.out.println("Done");
-		//Functions.solvecram (0, 0);
-		/*int number = tree.getNumberOfNodes();
-		System.out.println("Number of node : " + number);
-		tree.getRoot().getNumberOfChildren();*/
-		/*for (int i = 0;i < tree.getRoot().getNumberOfChildren() - 1;i++){
-			int one = tree.getRoot().getChildAt(i).getData().getRowOne();
-			int two = tree.getRoot().getChildAt(i).getData().getRowTwo();
-			int three =  tree.getRoot().getChildAt(i).getData().getColOne();
-			int four = tree.getRoot().getChildAt(i).getData().getColTwo();
-			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
-		}*/	
-		System.out.println("Possible Moves: " + functionsInstance.combinations);
 		
-		/*int i = 0;
-		while(i < tree.getRoot().getNumberOfChildren()) {
-	
-    	for(int k = 0; k < Functions.getNumofrows(); k++)
-		   {
-		      for(int j = 0; j < Functions.getNumofcols(); j++)
-		      {
-		    	  
-		         System.out.printf("%5d ", tree.getRoot().getChildAt(i).getData().getGrid()[k][j]);
-		      }
-		      
-		      System.out.println();
-		     
-		   }
-    	 System.out.println("\n");
-		   i++;
-		 }*/
+		System.out.println("Possible Moves: " + functionsInstance.combinations);
 
 		System.out.println(allGridsKeys.get(grid));
 		
@@ -101,6 +94,8 @@ public class Main {
 		String theMove = functionsInstance.findMove(allGrids, grid);
 		
 		System.out.println(theMove);
+		
+		}
 
 	}
 
