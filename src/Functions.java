@@ -368,8 +368,16 @@ public class Functions {
 		return false;
 		
 	}
-	public ArrayList<gridArrayClass> masterMoves (){
-	 byte [][] gridTest = new byte[][] { 
+public ArrayList<gridArrayClass> masterMoves (){
+		byte [][] gridTest2;
+		int keyrow = 0;
+		int keycol= 0;
+		int mastercomb = 0;
+		int start = 0;
+		int doneRow = 0;
+	ArrayList<gridArrayClass> allMasters = new ArrayList <gridArrayClass>();
+	for (int g = 1 ;g < (this.numofrows*this.numofcols) ;g++){
+		gridTest2 = new byte[][] { 
 				
 				{0,0,0,0,0},
 				{0,0,0,0,0},
@@ -378,16 +386,9 @@ public class Functions {
 				{0,0,0,0,0}
 						
 				};
-	
-		int keyrow = 0;
-		int keycol= 0;
-		int mastercomb = 0;
-		int start = 0;
-		int doneRow = 0;
-		ArrayList<gridArrayClass> allMasters = new ArrayList <gridArrayClass>();
-	for (int g = 1 ;g < (this.numofrows*this.numofcols) ;g++){
-		gridTest [keyrow][keycol] = 1;
+		gridTest2 [keyrow][keycol] = 1;
 		for (int i = doneRow; i < this.numofrows ; i++){
+			
 			if (i == doneRow + 1){
 				start = 0;
 			}
@@ -396,15 +397,17 @@ public class Functions {
 				//don't compute this one
 				}
 				else{
-					gridTest [i][j] = 1;
-					allMasters.add(new gridArrayClass (gridTest,true,false));
-					System.out.println(allMasters.get(0));
-					 gridTest [i][j] = 0; 
+					gridTest2 [i][j] = 1;
+					System.out.println("Keyrow: " + keyrow + " Keycol: " + keycol + " \ni: " + i + " j: " +j);
+					allMasters.add(new gridArrayClass (gridTest2,true,false));
+					System.out.println(allMasters.get(0) + "\n");
+					 gridTest2 [i][j] = 0; 
 					 mastercomb ++;
+					 System.out.println(mastercomb);
 				}
 			}
 		}
-		gridTest [keyrow][keycol] = 0;
+		gridTest2 [keyrow][keycol] = 0;
 		if (g % this.numofcols == 0){
 			keyrow++;
 			keycol = 0;
@@ -423,7 +426,36 @@ public class Functions {
 		}
 		
 	}
+	
 	return allMasters;
+
+}
+public ArrayList<StringBuilder> masterMovesString (){
+	
+	
+	int key = 0;
+	int mastercomb = 0;
+	int start = 1;
+ArrayList<StringBuilder> allMasters = new ArrayList <StringBuilder>();
+for (int g = 1 ;g < (this.numofrows*this.numofcols) ;g++){
+	StringBuilder masterMoves = new StringBuilder("OOOOOOOOOOOOOOOOOOOOOOOOO");
+	masterMoves.setCharAt(key, 'M');
+	for (int i = start; i < this.numofrows*this.numofcols ; i++){
+				masterMoves.setCharAt(i, 'M');
+				allMasters.add(new StringBuilder(masterMoves));
+				System.out.println(allMasters.get(0));
+				masterMoves.setCharAt(i, 'O');
+				 mastercomb ++;
+				 System.out.println(mastercomb);
+		
+	}
+	masterMoves.setCharAt(key, 'O');
+	key++;
+	start++;
+}
+
+return allMasters;
+
 }
 	public  int getNumofrows() {
 		return numofrows;

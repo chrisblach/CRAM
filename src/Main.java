@@ -29,27 +29,34 @@ public class Main {
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws java.lang.Exception
 	{		
-		ArrayList<gridArrayClass> allMasters = new ArrayList <gridArrayClass>();
+		ArrayList<StringBuilder> allMasters = new ArrayList <StringBuilder>();
 		Functions functionsInstance = new Functions();
 		functionsInstance.setNumofcols(numofcols);
 		functionsInstance.setNumofrows(numofrows);
-		allMasters = functionsInstance.masterMoves();
-		System.out.println(allMasters.get(299));
-		/*for(int k = 0; k < numofrows; k++)
-		   {
-		      for(int L = 0; L < numofcols; L++)
-		      {
-		         System.out.printf("%5d ", allMasters.get(1)[k][L]);
-		      }
-		      
-		      System.out.println();
-		   }*/
-	int i = 301;
-	while (i < allMasters.size()){
+		allMasters = functionsInstance.masterMovesString ();
+		for (int i = 0; i<300;i++){
+			int row = 0;
+			int col = 0;
+			for (int j = 1;j <= 25; j++){
+				
+				//temp = 5*row;
+				if (allMasters.get(i).charAt(j - 1) == 'M'){
+				gridInit [row][col] = 1;
+				}
+				col++;
+				if ((j % 5) == 0){
+					row++;
+					col = 0;
+				}
+			}
+			
 		
 		
+	
+		
+		grid.setGrid(gridInit);
 		//grid.setGrid(allMasters.get(i));
-		System.out.print("THIS IS THE GRID" + allMasters.get(i));
+		System.out.print("THIS IS THE GRID" + grid);
 		functionsInstance.setGrid(grid);
 		
 		//static int numofrows = 2;
@@ -93,10 +100,16 @@ public class Main {
 		
 		String theMove = functionsInstance.findMove(allGrids, grid);
 		
+		//reset grid
 		System.out.println(theMove);
-		
+		for (int r = 0; r < 5; r++){
+			for (int c = 0; c < 5; c++){
+				gridInit [r][c] = 0;
+			}
 		}
+		
 
-	}
+			}
+		}
 
 }
