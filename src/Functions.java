@@ -38,39 +38,39 @@ public class Functions {
 	private int doneCount = 0;
 	private int gridArrayLength = 1;
 	
-	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 	boolean hi = false;
 	//hi = tree.buildTree(getTree().getRoot(),row,onCol);
 	
-	buildHash(allGrids);
+	buildHash(allGrids, allGridsKeys);
 	hi = true;
 	if (hi){
 		System.out.println("Done");
 	}
 }
 	
-	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
     			for (int col = 0; col <= this.getNumofcols() - 1;col++){
     				if (this.canPlaceHor (grid,r,col)){
         					if (col == this.getNumofcols() - 1){
         						
         					}
-        					else this.placeOption(grid,r,col,r,col + 1, allGrids);
+        					else this.placeOption(grid,r,col,r,col + 1, allGrids, allGridsKeys);
     				}
     				if (this.canPlaceVer (grid,r,col)){
     					if (r == this.getNumofrows() - 1){
     						
     					}
-    					else this.placeOption(grid,r,col,r + 1,col, allGrids);
+    					else this.placeOption(grid,r,col,r + 1,col, allGrids, allGridsKeys);
     				}
     			}
     		}
-        		fillHash(allGrids);
+        		fillHash(allGrids, allGridsKeys);
     	}
 	
 	@SuppressWarnings("unchecked")
-	public void fillHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){         
+	public void fillHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){         
 		while (this.doneCount < this.gridArrayLength){
 			System.out.println(this.doneCount + " is less than " + this.gridArrayLength);
 			Object[] gridArray = allGrids.keySet().toArray();
@@ -91,7 +91,7 @@ public class Functions {
 								else
 									{
 									placed = true;
-									this.placeOption((gridArrayClass)gridArray[i],r,col,r,col + 1, allGrids);
+									this.placeOption((gridArrayClass)gridArray[i],r,col,r,col + 1, allGrids, allGridsKeys);
 									}
 							}
 							if (this.canPlaceVer ((gridArrayClass)gridArray[i],r,col)){
@@ -101,7 +101,7 @@ public class Functions {
 								else
 								{
 									placed = true;
-									this.placeOption((gridArrayClass)gridArray[i],r,col,r + 1,col, allGrids);
+									this.placeOption((gridArrayClass)gridArray[i],r,col,r + 1,col, allGrids, allGridsKeys);
 								}
 							}
 						}
@@ -124,10 +124,10 @@ public class Functions {
 				}
 			}
 		}
-		processHash(allGrids);
+		processHash(allGrids, allGridsKeys);
 	}
 	
-	public void processHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+	public void processHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 		System.out.println("Processing Hashes");
 		Object[] gridArray = allGrids.keySet().toArray();
 		this.gridArrayLength = gridArray.length;
@@ -138,17 +138,17 @@ public class Functions {
 				if (i % 10000 == 0){
 					System.out.println("Processing " + (i + 1) + " of " + gridArray.length + " keys/grids.");
 				}
-				if (!Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).getProcessed()){
+				if (!allGridsKeys.get(((gridArrayClass) gridArray[i])).getProcessed()){
 					LinkedList<Option> keyGridList = allGrids.get(gridArray[i]);
 					int winCount = 0;
 					int processedCount = 0;
 					for (int j = 0; j < keyGridList.size(); j++)
 					{
-						if(Main.allGridsKeys.get(keyGridList.get(j).getGrid()).getProcessed()){
+						if(allGridsKeys.get(keyGridList.get(j).getGrid()).getProcessed()){
 							keyGridList.get(j).getGrid().setProcessed(true);
 							processedCount++;
-							if(keyGridList.get(j).getGrid().getWin() != Main.allGridsKeys.get(keyGridList.get(j).getGrid()).getWin()){
-								keyGridList.get(j).getGrid().setWin(Main.allGridsKeys.get(keyGridList.get(j).getGrid()).getWin());
+							if(keyGridList.get(j).getGrid().getWin() != allGridsKeys.get(keyGridList.get(j).getGrid()).getWin()){
+								keyGridList.get(j).getGrid().setWin(allGridsKeys.get(keyGridList.get(j).getGrid()).getWin());
 							}
 							if (keyGridList.get(j).getGrid().getWin()){
 								winCount++;
@@ -157,15 +157,15 @@ public class Functions {
 					}
 					if (processedCount == keyGridList.size()){
 						if (winCount == keyGridList.size()){
-							Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setWin(false);
+							allGridsKeys.get(((gridArrayClass) gridArray[i])).setWin(false);
 						}
 						else{
-							Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setWin(true);
+							allGridsKeys.get(((gridArrayClass) gridArray[i])).setWin(true);
 						}
-						Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(true);
+						allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(true);
 					}
 					else{
-						Main.allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(false);
+						allGridsKeys.get(((gridArrayClass) gridArray[i])).setProcessed(false);
 					}
 				}
 				else{
@@ -176,13 +176,13 @@ public class Functions {
 		}
 	}
 	
-	public String findMove (HashMap<gridArrayClass, LinkedList<Option>> allGrids, gridArrayClass currentBoard){
+	public String findMove (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys, gridArrayClass currentBoard){
 		String theMove = "";
-		int moveRow1 = 1;
-		int moveRow2 = 1;
-		int moveCol1 = 1;
-		int moveCol2 = 1;
-		boolean canWin = Main.allGridsKeys.get(currentBoard).getWin();
+		byte moveRow1 = 1;
+		byte moveRow2 = 1;
+		byte moveCol1 = 1;
+		byte moveCol2 = 1;
+		boolean canWin = allGridsKeys.get(currentBoard).getWin();
 		
 		if(canWin){
 			//Search for L's
@@ -244,6 +244,88 @@ public class Functions {
 		return theMove;
 	}
 	
+	public void parseMove (String theMove, gridArrayClass theGrid){
+		byte moveRow1 = 1;
+		byte moveRow2 = 1;
+		byte moveCol1 = 1;
+		byte moveCol2 = 1;
+
+		switch (theMove.charAt(0)) {
+		case 'A':
+			moveCol1 = 0;
+			break;
+		case 'B':
+			moveCol1 = 1;
+			break;
+		case 'C':
+			moveCol1 = 2;
+			break;
+		case 'D':
+			moveCol1 = 3;
+			break;
+		case 'E':
+			moveCol1 = 4;
+			break;
+		}
+		
+		switch (theMove.charAt(1)) {
+		case '1':
+			moveRow1 = 0;
+			break;
+		case '2':
+			moveRow1 = 1;
+			break;
+		case '3':
+			moveRow1 = 2;
+			break;
+		case '4':
+			moveRow1 = 3;
+			break;
+		case '5':
+			moveRow1 = 4;
+			break;
+		}
+		
+		switch (theMove.charAt(2)) {
+		case 'A':
+			moveCol2 = 0;
+			break;
+		case 'B':
+			moveCol2 = 1;
+			break;
+		case 'C':
+			moveCol2 = 2;
+			break;
+		case 'D':
+			moveCol2 = 3;
+			break;
+		case 'E':
+			moveCol2 = 4;
+			break;
+		}
+		
+		switch (theMove.charAt(3)) {
+		case '1':
+			moveRow2 = 0;
+			break;
+		case '2':
+			moveRow2 = 1;
+			break;
+		case '3':
+			moveRow2 = 2;
+			break;
+		case '4':
+			moveRow2 = 3;
+			break;
+		case '5':
+			moveRow2 = 4;
+			break;
+		}
+		
+		theGrid.grid[moveRow1][moveCol1] = 1;
+		theGrid.grid[moveRow2][moveCol2] = 1;
+	}
+	
 	/*public  boolean solvecram (int row, int onCol){
 		return this.solvecram (grid, 0, 0);
 	}
@@ -268,7 +350,7 @@ public class Functions {
 		return false;	
 	}*/
 
-	public  void placeOption (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, HashMap<gridArrayClass, LinkedList<Option>> allGrids){
+	public  void placeOption (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 		byte [][] myIntInit = new byte[][]
 				{ 
 				
@@ -287,13 +369,15 @@ public class Functions {
 		Option option = new Option(myInt,row1,col1,row2,col2);
 		if (allGrids.get(myInt) != null)
 		{
+			//System.out.println("Placed If: " + myInt);
 			allGrids.get(currentgrid).add(option);
 		}
 		else
 		{
+			//System.out.println("Placed Else: " + myInt);
 			allGrids.get(currentgrid).add(option);
 			LinkedList<Option> newGrid = new LinkedList<Option>();
-			Main.allGridsKeys.put(myInt, myInt);
+			allGridsKeys.put(myInt, myInt);
 			allGrids.put(myInt, newGrid);
 		}
 		setLastoptionrow1(row1);

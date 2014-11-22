@@ -26,6 +26,12 @@ public class playerMain {
 	private static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
 	
 	static HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
+	
+	static HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+	
+	static boolean boardSolved = false;
+	
+	private static Functions f = new Functions ();
 	// The client socket
 		private static Socket clientSocket = null;
 		// The output stream
@@ -289,37 +295,50 @@ public class playerMain {
 			// NOTE ALONG WITH THE GIVE BOARD ... THE PREVIOUS MOVE IS AVAILABLE IN STRING previousMove
 			//
 			////////////////////////////////////////////////////////
-					int row = 0;
-					int col = 0;
-					for (int i = 1; i <= boardAsString.length(); i++){
-						
-						//temp = 5*row;
-						if (boardAsString.charAt(i - 1) == 'M' || boardAsString.charAt(i - 1) == 'R' || boardAsString.charAt(i - 1) == 'B'){
-						gridInit [row][col] = 1;
-						}
-						col++;
-						if ((i % 5) == 0){
-							row++;
-							col = 0;
-						}
-					}
-					Functions f = new Functions ();
-					f.setGrid(grid);
-					int numofrows = 2;
-					int numofcols = 3;
-					f.setNumofcols(numofcols);
-					f.setNumofrows(numofrows);
 					
-					HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+			if (!boardSolved){
+				int row = 0;
+				int col = 0;
+				for (int i = 1; i <= boardAsString.length(); i++){
 
-					LinkedList<Option> startGridList = new LinkedList<Option>();
-					allGridsKeys.put(grid, grid);
-					allGrids.put(grid, startGridList);
+					//temp = 5*row;
+					if (boardAsString.charAt(i - 1) == 'M' || boardAsString.charAt(i - 1) == 'R' || boardAsString.charAt(i - 1) == 'B'){
+						gridInit [row][col] = 1;
+					}
+					col++;
+					if ((i % 5) == 0){
+						row++;
+						col = 0;
+					}
+				}
+
+				f.setGrid(grid);
+				int numofrows = 5;
+				int numofcols = 5;
+				f.setNumofcols(numofcols);
+				f.setNumofrows(numofrows);
+
+				LinkedList<Option> startGridList = new LinkedList<Option>();
+				allGridsKeys.put(grid, grid);
+				allGrids.put(grid, startGridList);
+
+				f.solve(allGrids, allGridsKeys);
+				boardSolved = true;
+				System.out.println("Done");
+				
+				theMove = f.findMove(allGrids, allGridsKeys, grid);
+				
+				System.out.println(theMove);
+				
+			}
+			else{
+				f.parseMove(previousMove, grid);
+				theMove = f.findMove(allGrids, allGridsKeys, grid);
+				System.out.println(theMove);
+			}
 					
-					f.solve(allGrids);
-					System.out.println("Done");
-					
-					theMove = f.findMove(allGrids, grid);
+
+					theMove = f.findMove(allGrids, allGridsKeys, grid);
 					
 					System.out.println(theMove);
 					
@@ -327,7 +346,7 @@ public class playerMain {
 					   {
 					      for(int j = 0; j < 5; j++)
 					      {
-					         System.out.printf("%5d ", gridInit[i][j]);
+					         System.out.printf("%5d ", grid.grid[i][j]);
 					      }
 					      
 					      System.out.println();

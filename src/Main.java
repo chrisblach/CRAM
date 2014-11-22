@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,10 +12,10 @@ public class Main {
 	
 	private static byte [][] gridInit = new byte[][] { 
 			
+			{1,1,1,1,1},
 			{0,0,0,0,0},
-			{0,0,0,1,0},
 			{0,0,0,0,0},
-			{0,1,0,0,0},
+			{0,0,0,0,0},
 			{0,0,0,0,0}
 					
 			};
@@ -22,11 +24,13 @@ public class Main {
 	static int numofrows = 5;
 	static int numofcols = 5; 
 	
-	static HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
+	private static BufferedReader inputLine = null;
 	
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws java.lang.Exception
 	{
+		
+		inputLine = new BufferedReader(new InputStreamReader(System.in));
 		
 		Functions functionsInstance = new Functions();
 		functionsInstance.setGrid(grid);
@@ -43,6 +47,8 @@ public class Main {
 		
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 
+		HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
+		
 		LinkedList<Option> startGridList = new LinkedList<Option>();
 		allGridsKeys.put(grid, grid);
 		allGrids.put(grid, startGridList);
@@ -50,7 +56,7 @@ public class Main {
 		
 		
 		
-		functionsInstance.solve(allGrids);
+		functionsInstance.solve(allGrids, allGridsKeys);
 		System.out.println("Done");
 		//Functions.solvecram (0, 0);
 		/*int number = tree.getNumberOfNodes();
@@ -83,7 +89,9 @@ public class Main {
 		   i++;
 		 }*/
 
-		System.out.println(allGridsKeys.get(grid));
+		System.out.println("Unique Boards: " + allGrids.size());
+
+		System.out.println("Starting board:\n" + allGridsKeys.get(grid));
 		
 		/*// Get a set of the entries
 		Set<?> set = allGrids.entrySet();
@@ -96,12 +104,29 @@ public class Main {
 			System.out.print(me.getValue());
 		}*/
 		
-		System.out.println("Unique Boards: " + allGrids.size());
-		
-		String theMove = functionsInstance.findMove(allGrids, grid);
-		
-		System.out.println(theMove);
-
+		System.out.println("Our move first? Y/N");
+		String moveFirst = null;
+		while(moveFirst == null){		
+			moveFirst = inputLine.readLine();
+		}
+		if (moveFirst.equals("Y")){
+			String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
+			System.out.println("Our Move: " + theMove);
+			functionsInstance.parseMove(theMove, grid);
+			System.out.println("Their board:\n" + allGridsKeys.get(grid));
+		}
+		while (true){
+			System.out.println("What is their move?");
+			String theirMove = null;
+			while(theirMove == null){		
+				theirMove = inputLine.readLine();
+			}
+			functionsInstance.parseMove(theirMove, grid);
+			System.out.println("Our board:\n" + allGridsKeys.get(grid));
+			String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
+			System.out.println("Our Move: " + theMove);
+			functionsInstance.parseMove(theMove, grid);
+			System.out.println("Their board:\n" + allGridsKeys.get(grid));
+		}
 	}
-
 }
