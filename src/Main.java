@@ -12,7 +12,7 @@ public class Main {
 	
 	private static byte [][] gridInit = new byte[][] { 
 			
-			{0,0,0,0,0},
+			{1,1,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
@@ -21,8 +21,8 @@ public class Main {
 			};
 	
 	private static gridArrayClass grid = new gridArrayClass(gridInit, true, false);
-	static int numofrows = 3;
-	static int numofcols = 4; 
+	static int numofrows = 5;
+	static int numofcols = 5; 
 	
 	private static BufferedReader inputLine = null;
 	
@@ -45,6 +45,8 @@ public class Main {
 		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
 		Functions.getTree().setRoot(root);*/
 		
+		//System.out.println("Worst return: " + functionsInstance.checkForWorst(grid));
+		
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 
 		HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
@@ -52,9 +54,6 @@ public class Main {
 		LinkedList<Option> startGridList = new LinkedList<Option>();
 		allGridsKeys.put(grid, grid);
 		allGrids.put(grid, startGridList);
-		
-		
-		
 		
 		functionsInstance.solve(allGrids, allGridsKeys);
 		System.out.println("Done");

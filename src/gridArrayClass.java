@@ -3,7 +3,7 @@ public class gridArrayClass {
   boolean win;
   boolean processed;
   float winningRatio;
-  int totalChildren;
+  long totalChildren;
 
   public gridArrayClass( byte b[][], boolean condition, boolean processed ) {
      grid = b;
@@ -37,11 +37,11 @@ public class gridArrayClass {
 		this.winningRatio = winningRatio;
 	}
 	
-	public int getTotalChildren() {
+	public long getTotalChildren() {
 		return totalChildren;
 	}
 
-	public void setTotalChildren(int totalChildren) {
+	public void setTotalChildren(long totalChildren) {
 		this.totalChildren = totalChildren;
 	}
 

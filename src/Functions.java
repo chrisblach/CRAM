@@ -38,6 +38,21 @@ public class Functions {
 	private int doneCount = 0;
 	private int gridArrayLength = 1;
 	
+	private LinkedList<gridArrayClass> worstCases = new LinkedList<gridArrayClass>();
+	private LinkedList<String> worstCaseMoves = new LinkedList<String>();
+	
+	public String checkForWorst(gridArrayClass passedGrid){
+		String returnString = "N";
+		for (int worst = 0; worst < 8; worst++){
+			if (passedGrid.equals(worstCases.get(worst))){
+				System.out.println("Starting grid is a worst case");
+				returnString = worstCaseMoves.get(worst);
+				break;
+			}
+		}
+		return returnString;
+	}
+	
 	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 	boolean hi = false;
 	//hi = tree.buildTree(getTree().getRoot(),row,onCol);
@@ -197,7 +212,7 @@ public class Functions {
 		if(canWin){
 			//Search for L with least children
 			LinkedList<Option> keyGridList = allGrids.get(currentBoard);
-			int leastChildren = Integer.MAX_VALUE;
+			long leastChildren = Long.MAX_VALUE;
 			int leastChildrenIndex = 0;
 			for (int i = 0; i < keyGridList.size(); i++){
 				if(!keyGridList.get(i).getGrid().getWin()){
@@ -216,7 +231,7 @@ public class Functions {
 			//Search for W with highest ratio then most children
 			LinkedList<Option> keyGridList = allGrids.get(currentBoard);
 			float highestRatio = 0;
-			int mostChildren = 0;
+			long mostChildren = 0;
 			int mostChildrenIndex = 0;
 			for (int i = 0; i < keyGridList.size(); i++){
 				if (keyGridList.get(i).getGrid().getWinningRatio() > highestRatio){
