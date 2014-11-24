@@ -195,24 +195,47 @@ public class Functions {
 		boolean canWin = allGridsKeys.get(currentBoard).getWin();
 		
 		if(canWin){
-			//Search for L's
+			//Search for L with least children
 			LinkedList<Option> keyGridList = allGrids.get(currentBoard);
+			int leastChildren = Integer.MAX_VALUE;
+			int leastChildrenIndex = 0;
 			for (int i = 0; i < keyGridList.size(); i++){
 				if(!keyGridList.get(i).getGrid().getWin()){
-					moveRow1 += (keyGridList.get(i).getRowOne());
-					moveRow2 += (keyGridList.get(i).getRowTwo());
-					moveCol1 += (keyGridList.get(i).getColOne());
-					moveCol2 += (keyGridList.get(i).getColTwo());
-					break;
+					if (keyGridList.get(i).getGrid().getTotalChildren() < leastChildren){
+						leastChildren = keyGridList.get(i).getGrid().getTotalChildren();
+						leastChildrenIndex = i;
+					}
 				}
 			}
+			moveRow1 += (keyGridList.get(leastChildrenIndex).getRowOne());
+			moveRow2 += (keyGridList.get(leastChildrenIndex).getRowTwo());
+			moveCol1 += (keyGridList.get(leastChildrenIndex).getColOne());
+			moveCol2 += (keyGridList.get(leastChildrenIndex).getColTwo());
 		}
 		else{
-			//Pick any child
-			moveRow1 += (allGrids.get(currentBoard).get(0).getRowOne());
-			moveRow2 += (allGrids.get(currentBoard).get(0).getRowTwo());
-			moveCol1 += (allGrids.get(currentBoard).get(0).getColOne());
-			moveCol2 += (allGrids.get(currentBoard).get(0).getColTwo());
+			//Search for W with highest ratio then most children
+			LinkedList<Option> keyGridList = allGrids.get(currentBoard);
+			float highestRatio = 0;
+			int mostChildren = 0;
+			int mostChildrenIndex = 0;
+			for (int i = 0; i < keyGridList.size(); i++){
+				if (keyGridList.get(i).getGrid().getWinningRatio() > highestRatio){
+					highestRatio = keyGridList.get(i).getGrid().getWinningRatio();
+					mostChildren = keyGridList.get(i).getGrid().getTotalChildren();
+					mostChildrenIndex = i;
+				}
+				else if(keyGridList.get(i).getGrid().getWinningRatio() == highestRatio){
+					if (keyGridList.get(i).getGrid().getTotalChildren() > mostChildren){
+						highestRatio = keyGridList.get(i).getGrid().getWinningRatio();
+						mostChildren = keyGridList.get(i).getGrid().getTotalChildren();
+						mostChildrenIndex = i;
+					}
+				}
+			}
+			moveRow1 += (keyGridList.get(mostChildrenIndex).getRowOne());
+			moveRow2 += (keyGridList.get(mostChildrenIndex).getRowTwo());
+			moveCol1 += (keyGridList.get(mostChildrenIndex).getColOne());
+			moveCol2 += (keyGridList.get(mostChildrenIndex).getColTwo());
 		}
 	
 		 switch (moveCol1) {
