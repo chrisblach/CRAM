@@ -12,7 +12,7 @@ public class Main {
 	
 	private static byte [][] gridInit = new byte[][] { 
 			
-			{1,1,1,1,1},
+			{0,0,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
 			{0,0,0,0,0},
@@ -21,8 +21,8 @@ public class Main {
 			};
 	
 	private static gridArrayClass grid = new gridArrayClass(gridInit, true, false);
-	static int numofrows = 5;
-	static int numofcols = 5; 
+	static int numofrows = 3;
+	static int numofcols = 3; 
 	
 	private static BufferedReader inputLine = null;
 	
@@ -93,7 +93,7 @@ public class Main {
 
 		System.out.println("Starting board:\n" + allGridsKeys.get(grid));
 		
-		/*// Get a set of the entries
+		// Get a set of the entries
 		Set<?> set = allGrids.entrySet();
 		// Get an iterator
 		Iterator<?> i = set.iterator();
@@ -102,7 +102,7 @@ public class Main {
 			Map.Entry<gridArrayClass, LinkedList<Option>> me = (Map.Entry<gridArrayClass, LinkedList<Option>>)i.next();
 			System.out.print("\n\n" + me.getKey() + ": ");
 			System.out.print(me.getValue());
-		}*/
+		}
 		
 		System.out.println("Our move first? Y/N");
 		String moveFirst = null;

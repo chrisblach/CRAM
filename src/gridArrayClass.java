@@ -2,11 +2,15 @@ public class gridArrayClass {
   byte grid[][];
   boolean win;
   boolean processed;
+  float winningRatio;
+  int totalChildren;
 
   public gridArrayClass( byte b[][], boolean condition, boolean processed ) {
      grid = b;
      setWin(condition);
      setProcessed(processed);
+     setWinningRatio(0);
+     setTotalChildren(0);
   }
   
 	public boolean getWin() {
@@ -23,6 +27,22 @@ public class gridArrayClass {
 
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
+	}
+	
+	public float getWinningRatio() {
+		return winningRatio;
+	}
+
+	public void setWinningRatio(float winningRatio) {
+		this.winningRatio = winningRatio;
+	}
+	
+	public int getTotalChildren() {
+		return totalChildren;
+	}
+
+	public void setTotalChildren(int totalChildren) {
+		this.totalChildren = totalChildren;
 	}
 
   public int hashCode() {
@@ -68,6 +88,8 @@ public class gridArrayClass {
 	  returnString += "]";
 	  returnString += "W: " + win;
 	  returnString += ", P: " + processed;
+	  returnString += ", R: " + winningRatio;
+	  returnString += ", C: " + totalChildren;
 	  return returnString;
 	}
 }
