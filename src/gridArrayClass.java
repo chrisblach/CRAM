@@ -45,6 +45,7 @@ public class gridArrayClass {
 		this.totalChildren = totalChildren;
 	}
 
+	@Override
   public int hashCode() {
     //int hash = 0;
     int hash = java.util.Arrays.deepHashCode(grid);
@@ -55,18 +56,26 @@ public class gridArrayClass {
     return hash;
   }
 
+  @Override
   public boolean equals( Object b ) {
-     if (!(b instanceof gridArrayClass))
+     if (!(b instanceof gridArrayClass)){
         return false;
-     if ( grid.length != ((gridArrayClass)b).grid.length )
+     }
+     if ( grid.length != ((gridArrayClass)b).grid.length ){
         return false;
-     for (int k = 0; k < grid.length; k++ )
-    	 if ( grid[k].length != ((gridArrayClass)b).grid[k].length )
+     }
+     for (int k = 0; k < grid.length; k++ ){
+    	 if ( grid[k].length != ((gridArrayClass)b).grid[k].length ){
     	        return false;
-     for (int i = 0; i < grid.length; i++ )
-    	 for (int j = 0; j < grid[i].length; j++ )
-    		 if (grid[i][j] != ((gridArrayClass)b).grid[i][j])
+    	 }
+     }
+     for (int i = 0; i < grid.length; i++ ){
+    	 for (int j = 0; j < grid[i].length; j++ ){
+    		 if (grid[i][j] != ((gridArrayClass)b).grid[i][j]){
     			 return false;
+    		 }
+    	 }
+     }
      return true;
   }
   

@@ -51,7 +51,7 @@ public class Functions {
 					
 			};
 		
-	private  gridArrayClass TLHG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass TLHG = new gridArrayClass(TLHI, true, false);
 		
 	String TLHS = "C3D3";
 	
@@ -65,7 +65,7 @@ private byte [][] TLVI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass TLVG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass TLVG = new gridArrayClass(TLVI, true, false);
 		
 	String TLVS = "C3C4";
 	
@@ -79,7 +79,7 @@ private byte [][] BLHI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass BLHG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass BLHG = new gridArrayClass(BLHI, true, false);
 		
 	String BLHS = "C3D3";
 	
@@ -93,7 +93,7 @@ private byte [][] BLVI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass BLVG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass BLVG = new gridArrayClass(BLVI, true, false);
 		
 	String BLVS = "C2C3";
 	
@@ -107,7 +107,7 @@ private byte [][] TRHI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass TRHG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass TRHG = new gridArrayClass(TRHI, true, false);
 		
 	String TRHS = "B3C3";
 	
@@ -121,7 +121,7 @@ private byte [][] TRVI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass TRVG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass TRVG = new gridArrayClass(TRVI, true, false);
 		
 	String TRVS = "C3C4";
 	
@@ -135,7 +135,7 @@ private byte [][] BRHI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass BRHG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass BRHG = new gridArrayClass(BRHI, true, false);
 		
 	String BRHS = "B3C3";
 	
@@ -149,7 +149,7 @@ private byte [][] BRVI = new byte[][] {
 					
 			};
 		
-	private  gridArrayClass BRVG = new gridArrayClass(gridInit, true, false);
+	private  gridArrayClass BRVG = new gridArrayClass(BRVI, true, false);
 		
 	String BRVS = "C2C3";
 	

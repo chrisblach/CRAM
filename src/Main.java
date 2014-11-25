@@ -45,7 +45,13 @@ public class Main {
 		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
 		Functions.getTree().setRoot(root);*/
 		
-		System.out.println("Worst return: " + functionsInstance.checkForWorst(grid));
+		String worstReturn = functionsInstance.checkForWorst(grid);
+		if(worstReturn.equals("N")){
+			System.out.println("Not a worst case starting grid.");
+		}
+		else{
+			functionsInstance.parseMove(worstReturn, grid);
+		}
 		
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 
