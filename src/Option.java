@@ -9,7 +9,15 @@ public class Option {
 	private int colTwo;
 	
 	
-	
+	/********************************************************************************************
+	 * @param currentgrid - The current Grid
+	 * @param row1 - First row move taken on grid
+	 * @param col1 - First column move taken on grid
+	 * @param row2 - Second row move taken on grid
+	 * @param col2 - Second row move taken on grid
+	 * 
+	 * Object to save the current grid and also the move that was taken to make the grid happen
+	 ********************************************************************************************/
 	public Option (gridArrayClass currentgrid, int row1, int col1, int row2, int col2){
 		setGrid (currentgrid);
 		setRowOne (row1);
@@ -20,7 +28,12 @@ public class Option {
 
 
 
-
+	/*
+	 * 
+	 * 
+	 * Simple Getters and Setters Below
+	 * 
+	 */
 
 	public gridArrayClass getGrid() {
 		return grid;
@@ -71,6 +84,10 @@ public class Option {
 		this.colTwo = colTwo;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString(){
 		return "\n" + this.grid.toString() + ", " + this.rowOne + ", " 
 				+ this.rowTwo + ", " + this.colOne + ", " + this.colTwo;

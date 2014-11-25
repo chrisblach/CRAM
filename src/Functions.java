@@ -4,26 +4,53 @@ import java.lang.*;
 import java.io.*;
 
 public class Functions {
-
+	
+	/*
+	 * 
+	 * Initialize number of rows and columns
+	 * Initialize number of combinations
+	 * 
+	 */
 	private  int numofrows = 2;
 	private  int numofcols = 3;
-	private  int temp = 0;
 	int combinations = 0;
-	private  int combinationstemp = 0;
-
+	
+	/*
+	 * 
+	 * 
+	 * Declaring last used rows and columns
+	 * 
+	 */
 	private  int lastoptionrow1;
 	private  int lastoptioncol1;
 	private  int lastoptionrow2;
 	private  int lastoptioncol2;
-
+	
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	public  int number = 0;
 	
 	private int doneCount = 0;
 	private int gridArrayLength = 1;
 	
+	/*
+	 * 
+	 * Declaring TWO LinkedLists for worstCases, one of gridArrayClass (for the grid)
+	 * and the second of String (for the move)
+	 * 
+	 */
 	private LinkedList<gridArrayClass> worstCases = new LinkedList<gridArrayClass>();
 	private LinkedList<String> worstCaseMoves = new LinkedList<String>();
 	
+	/*
+	 * 
+	 *Declaration, initialization of all our worst cases (16) 
+	 * 
+	 */
 	private byte [][] TLHI = new byte[][] { 
 			
 			{1,1,0,0,0},
@@ -247,7 +274,21 @@ private byte [][] LDI = new byte[][] {
 	private  gridArrayClass LDG = new gridArrayClass(LDI, true, false);
 		
 	String LDS = "B2C2";
+	/*
+	 * 
+	 * 
+	 * End Worst Cases
+	 * 
+	 * 
+	 *
+	 */
 	
+	/************************************************************
+	 * @param passedGrid - Starting grid if going first
+	 * @return String of the move to take with that worst move
+	 * 
+	 * Method to check for the worst case. Simple compare.
+	 ***********************************************************/
 	public String checkForWorst(gridArrayClass passedGrid){
 		worstCases.add(TLHG);
 		worstCases.add(TLVG);
@@ -293,12 +334,12 @@ private byte [][] LDI = new byte[][] {
 	}
 	
 	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
-	boolean hi = false;
+	boolean done = false;
 	
 	
 	buildHash(allGrids, allGridsKeys);
-	hi = true;
-	if (hi){
+	done = true;
+	if (done){
 		System.out.println("Done");
 	}
 }
@@ -530,6 +571,13 @@ private byte [][] LDI = new byte[][] {
 		return theMove;
 	}
 	
+	/**
+	 * @param theMove - The servers MOVE string
+	 * @param theGrid - The current grid
+	 * 
+	 * Decodes the servers string into our format and then adds it to our grid
+	 * for us to parse
+	 */
 	public void parseMove (String theMove, gridArrayClass theGrid){
 		byte moveRow1 = 1;
 		byte moveRow2 = 1;
@@ -611,7 +659,19 @@ private byte [][] LDI = new byte[][] {
 		theGrid.grid[moveRow1][moveCol1] = 1;
 		theGrid.grid[moveRow2][moveCol2] = 1;
 	}
-
+	/*********************************************************************************************
+	 * @param currentgrid - The current grid we want to place the move on
+	 * @param row1 - The row we want to place the move on
+	 * @param col1 - The column we want to place the move on
+	 * @param row2 - The second row we want to place the move on
+	 * @param col2 - The second column we want to place the move on
+	 * @param allGrids - 
+	 * @param allGridsKeys -
+	 *
+	 * Takes the option that was previous checked if it can be placed, and places it in the grid. 
+	 * The grid is then taken and put into the HashMap
+	 *
+	 *********************************************************************************************/
 	public  void placeOption (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 		byte [][] myIntInit = new byte[][]
 				{ 
@@ -655,6 +715,14 @@ private byte [][] LDI = new byte[][] {
 		 System.out.println("REMOVE:");
 	}
 	
+	/************************************************************************************************
+	 * @param currentgrid - Checks if move can be placed on this grid
+	 * @param row - Checks the row
+	 * @param col - Check this column
+	 * @return - Returns true if move can be placed and false if it can't
+	 * 
+	 * Returns true if move can be placed HORIZONTALLY and false if it can't be placed HORIZONTALLY
+	 ************************************************************************************************/
 	public  boolean canPlaceHor (gridArrayClass currentgrid, int row, int col){
 		if (row > 4 || col >= 4){
 			   
@@ -668,6 +736,14 @@ private byte [][] LDI = new byte[][] {
 		
 	}
 	
+	/********************************************************************************************
+	 * @param currentgrid - Checks if move can be placed on this grid
+	 * @param row - Checks the row
+	 * @param col - Check this column
+	 * @return - Returns true if move can be placed and false if it can't
+	 * 
+	 * Returns true if move can be placed VERTICALLY and false if it can't be placed VERTICALLY
+	 ********************************************************************************************/
 	public  boolean canPlaceVer (gridArrayClass currentgrid, int row, int col){
 		if (row >= 4 || col >4){
 			   
@@ -681,6 +757,13 @@ private byte [][] LDI = new byte[][] {
 		
 	}
 	
+	/*
+	 * 
+	 * 
+	 * Getters and setters below
+	 * 
+	 * 
+	 */
 	public  int getNumofrows() {
 		return numofrows;
 	}
