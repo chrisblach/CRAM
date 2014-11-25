@@ -47,12 +47,7 @@ public class gridArrayClass {
 
 	@Override
   public int hashCode() {
-    //int hash = 0;
     int hash = java.util.Arrays.deepHashCode(grid);
-    //for (int i = 0; i < grid.length; i++)
-    	//for (int j = 0; j < grid.length; j++)
-    		//if (grid[i][j])
-    			//hash += Math.pow(2, i);
     return hash;
   }
 
@@ -80,7 +75,6 @@ public class gridArrayClass {
   }
   
   public String toString(){
-		//return Arrays.deepToString(this.grid);
 	  String returnString = "";
 	  for (int i = 0; i < Main.numofrows; i++){
 		  returnString += "[";

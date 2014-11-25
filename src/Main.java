@@ -33,72 +33,17 @@ public class Main {
 		inputLine = new BufferedReader(new InputStreamReader(System.in));
 		
 		Functions functionsInstance = new Functions();
-		//static int numofrows = 2;
-		//static int numofcols = 2; 
+		
 		functionsInstance.setNumofcols(numofcols);
 		functionsInstance.setNumofrows(numofrows);
-		/*Option optionroot = new Option (grid,0,0,0,0,false);
-		Functions.setOptionroot(optionroot);
-	 	GenericTree<Option> tree = new GenericTree<Option>();
-	 	Functions.setTree(tree);
-		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
-		Functions.getTree().setRoot(root);*/
+		
 		
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 
 		HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 		
-		//functionsInstance.solve(allGrids, allGridsKeys);
-		//System.out.println("Done");
-		//Functions.solvecram (0, 0);
-		/*int number = tree.getNumberOfNodes();
-		System.out.println("Number of node : " + number);
-		tree.getRoot().getNumberOfChildren();*/
-		/*for (int i = 0;i < tree.getRoot().getNumberOfChildren() - 1;i++){
-			int one = tree.getRoot().getChildAt(i).getData().getRowOne();
-			int two = tree.getRoot().getChildAt(i).getData().getRowTwo();
-			int three =  tree.getRoot().getChildAt(i).getData().getColOne();
-			int four = tree.getRoot().getChildAt(i).getData().getColTwo();
-			System.out.println("Row1:" + one + " Col1:" + three + "\nRow2:" + two + " Col2:" + four + "\n\n");
-		}*/	
-		//System.out.println("Possible Moves: " + functionsInstance.combinations);
-		
-		/*int i = 0;
-		while(i < tree.getRoot().getNumberOfChildren()) {
-	
-    	for(int k = 0; k < Functions.getNumofrows(); k++)
-		   {
-		      for(int j = 0; j < Functions.getNumofcols(); j++)
-		      {
-		    	  
-		         System.out.printf("%5d ", tree.getRoot().getChildAt(i).getData().getGrid()[k][j]);
-		      }
-		      
-		      System.out.println();
-		     
-		   }
-    	 System.out.println("\n");
-		   i++;
-		 }*/
-
-		//System.out.println("Unique Boards: " + allGrids.size());
-
 		System.out.println("Starting board:\n" + grid);
 		
-		//System.out.println("Starting board options:\n" + allGrids.get(grid));
-		
-		
-		
-		/*// Get a set of the entries
-		Set<?> set = allGrids.entrySet();
-		// Get an iterator
-		Iterator<?> i = set.iterator();
-		// Display elements
-		while(i.hasNext()) {
-			Map.Entry<gridArrayClass, LinkedList<Option>> me = (Map.Entry<gridArrayClass, LinkedList<Option>>)i.next();
-			System.out.print("\n\n" + me.getKey() + ": ");
-			System.out.print(me.getValue());
-		}*/
 		boolean boardSolved = false;
 		System.out.println("Our move first? Y/N");
 		String moveFirst = null;

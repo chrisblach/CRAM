@@ -23,10 +23,6 @@ public class Option {
 
 
 	public gridArrayClass getGrid() {
-		//int [][] myInt = new int[5][];
-		//for(int i = 0; i < 5; i++)
-		//    myInt[i] = grid[i].clone();
-		//return myInt;
 		return grid;
 	}
 

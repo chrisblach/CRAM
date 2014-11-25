@@ -8,16 +8,13 @@ public class Functions {
 	private  int numofrows = 2;
 	private  int numofcols = 3;
 	private  int temp = 0;
-	 int combinations = 0;
+	int combinations = 0;
 	private  int combinationstemp = 0;
 
 	private  int lastoptionrow1;
 	private  int lastoptioncol1;
 	private  int lastoptionrow2;
 	private  int lastoptioncol2;
-	
-	
-	private  GenericTree<Option> tree = new GenericTree<Option>();
 
 	public  int number = 0;
 	
@@ -297,7 +294,7 @@ private byte [][] LDI = new byte[][] {
 	
 	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 	boolean hi = false;
-	//hi = tree.buildTree(getTree().getRoot(),row,onCol);
+	
 	
 	buildHash(allGrids, allGridsKeys);
 	hi = true;
@@ -334,16 +331,16 @@ private byte [][] LDI = new byte[][] {
 			this.gridArrayLength = gridArray.length;
 			this.doneCount = 0;
 			for(int i = 0; i < this.gridArrayLength; i++) {
-				//System.out.println("i is" + i);
+			
 				if (allGrids.get(gridArray[i]).peekFirst() == null)
 				{
-					//System.out.println(i + " is null ");
+				
 					boolean placed = false;
 					for (int r = 0;r <= this.getNumofrows() - 1;r++){
 						for (int col = 0; col <= this.getNumofcols() - 1;col++){
 							if (this.canPlaceHor ((gridArrayClass)gridArray[i],r,col)){
 								if (col == this.getNumofcols() - 1){
-									//System.out.println("Not placing");
+								
 								}
 								else
 									{
@@ -353,7 +350,7 @@ private byte [][] LDI = new byte[][] {
 							}
 							if (this.canPlaceVer ((gridArrayClass)gridArray[i],r,col)){
 								if (r == this.getNumofrows() - 1){
-									//System.out.println("Not placing 2");
+						
 								}
 								else
 								{
@@ -365,13 +362,12 @@ private byte [][] LDI = new byte[][] {
 					}
 					if (!placed)
 					{
-						//System.out.println("Not placed");
+						
 						Option option = new Option((gridArrayClass)gridArray[i],0,0,0,0);
 						allGrids.get(gridArray[i]).add(option);
 						((gridArrayClass) gridArray[i]).setWin(false);
 						((gridArrayClass) gridArray[i]).setProcessed(true);
-						//this.placeOption((gridArrayClass)gridArray[i],0,0,0,0, allGrids);
-						//allGrids.get(gridArray[i]).get(0).setWin(true);
+						
 					}
 				}
 				else
@@ -615,30 +611,6 @@ private byte [][] LDI = new byte[][] {
 		theGrid.grid[moveRow1][moveCol1] = 1;
 		theGrid.grid[moveRow2][moveCol2] = 1;
 	}
-	
-	/*public  boolean solvecram (int row, int onCol){
-		return this.solvecram (grid, 0, 0);
-	}
-	private  boolean solvecram (int currentgrid [][], int row,int onCol)	{
-		for (int r = row;r <= numofrows - 1;r++){
-			for (int col = onCol; col < numofcols - 1;col++){
-				if (canPlaceHor (currentgrid,r,col)){
-					//placeOption(currentgrid,r,col,r,col + 1);
-					removeOption (currentgrid,lastoptionrow1,lastoptioncol1,lastoptionrow2,lastoptioncol2);
-				}
-			}
-		}
-		for (int col = onCol; col <= numofcols - 1; col++){
-			for (int r = row; r < numofrows - 1; r++){
-				if (canPlaceVer (currentgrid,r,col)){
-					//placeOption(currentgrid,r,col,r + 1,col);
-					removeOption (currentgrid,lastoptionrow1,lastoptioncol1,lastoptionrow2,lastoptioncol2);
-				}
-			}
-		}
-		
-		return false;	
-	}*/
 
 	public  void placeOption (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 		byte [][] myIntInit = new byte[][]
@@ -659,12 +631,12 @@ private byte [][] LDI = new byte[][] {
 		Option option = new Option(myInt,row1,col1,row2,col2);
 		if (allGrids.get(myInt) != null)
 		{
-			//System.out.println("Placed If: " + myInt);
+			
 			allGrids.get(currentgrid).add(option);
 		}
 		else
 		{
-			//System.out.println("Placed Else: " + myInt);
+			
 			allGrids.get(currentgrid).add(option);
 			LinkedList<Option> newGrid = new LinkedList<Option>();
 			allGridsKeys.put(myInt, myInt);
@@ -675,46 +647,12 @@ private byte [][] LDI = new byte[][] {
 		setLastoptionrow2(row2);
 		setLastoptioncol2(col2);
 		combinations++;
-		/*try {
-			Thread.sleep(0);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for(int i = 0; i < numofrows; i++)
-		   {
-		      for(int j = 0; j < numofcols; j++)
-		      {
-		         System.out.printf("%5d ", myInt[i][j]);
-		      }
-		      
-		      System.out.println();
-		   }
-	      System.out.println("\n");
-	     System.out.println(combinations);*/
 	}
 	
 	public  void removeOption (byte currentgrid [][], int row1, int col1, int row2, int col2){
 		currentgrid [row1][col1] = 0;
 		currentgrid [row2][col2] = 0;
 		 System.out.println("REMOVE:");
-		 /*try {
-			Thread.sleep(0);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("\n");
-		for(int i = 0; i < numofrows; i++)
-		   {
-		      for(int j = 0; j < numofcols; j++)
-		      {
-		         System.out.printf("%5d ", currentgrid[i][j]);
-		      }
-		      
-		      System.out.println();
-		   }
-		 System.out.println("\n");*/
 	}
 	
 	public  boolean canPlaceHor (gridArrayClass currentgrid, int row, int col){
@@ -778,12 +716,5 @@ private byte [][] LDI = new byte[][] {
 	}
 	public  void setLastoptioncol2(int lastoptioncol2) {
 		this.lastoptioncol2 = lastoptioncol2;
-	}
-	
-	public  GenericTree<Option> getTree() {
-		return tree;
-	}
-	public  void setTree(GenericTree<Option> tree) {
-		this.tree = tree;
 	}
 }
