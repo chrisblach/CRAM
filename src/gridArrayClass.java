@@ -4,7 +4,12 @@ public class gridArrayClass {
   boolean processed;
   float winningRatio;
   long totalChildren;
-
+  
+  /****************************************************************************************************
+   * @param b - Grid at this point
+   * @param condition - Can we win at this board position? True if YES, false if NO (DEFAULT TRUE)
+   * @param processed - Has this board been processed yet? True if YES, False if NO (DEFAULT FALSE)
+   ****************************************************************************************************/
   public gridArrayClass( byte b[][], boolean condition, boolean processed ) {
      grid = b;
      setWin(condition);
@@ -13,10 +18,13 @@ public class gridArrayClass {
      setTotalChildren(0);
   }
   
+  /*
+   * Getters and Setters
+   */
 	public boolean getWin() {
 		return win;
 	}
-
+	
 	public void setWin(boolean win) {
 		this.win = win;
 	}
@@ -45,12 +53,20 @@ public class gridArrayClass {
 		this.totalChildren = totalChildren;
 	}
 
+/*
+ * (non-Javadoc)
+ * @see java.lang.Object#hashCode()
+ */
 	@Override
   public int hashCode() {
     int hash = java.util.Arrays.deepHashCode(grid);
     return hash;
   }
-
+	
+/*
+ * (non-Javadoc)
+ * @see java.lang.Object#equals(java.lang.Object)
+ */
   @Override
   public boolean equals( Object b ) {
      if (!(b instanceof gridArrayClass)){
@@ -74,6 +90,10 @@ public class gridArrayClass {
      return true;
   }
   
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   public String toString(){
 	  String returnString = "";
 	  for (int i = 0; i < Main.numofrows; i++){

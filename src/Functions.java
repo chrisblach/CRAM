@@ -333,6 +333,12 @@ private byte [][] LDI = new byte[][] {
 		return returnString;
 	}
 	
+	/*********************************************
+	 * @param allGrids - 
+	 * @param allGridsKeys - 
+	 * 
+	 * Calls buildHash() to solve the given grid
+	 *********************************************/
 	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 	boolean done = false;
 	
@@ -344,6 +350,10 @@ private byte [][] LDI = new byte[][] {
 	}
 }
 	
+	/**
+	 * @param allGrids
+	 * @param allGridsKeys
+	 */
 	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
     			for (int col = 0; col <= this.getNumofcols() - 1;col++){
@@ -364,6 +374,10 @@ private byte [][] LDI = new byte[][] {
         		fillHash(allGrids, allGridsKeys);
     	}
 	
+	/***********************************************
+	 * @param allGrids
+	 * @param allGridsKeys
+	 ***********************************************/
 	@SuppressWarnings("unchecked")
 	public void fillHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){         
 		while (this.doneCount < this.gridArrayLength){
@@ -421,6 +435,10 @@ private byte [][] LDI = new byte[][] {
 		processHash(allGrids, allGridsKeys);
 	}
 	
+	/***********************************************
+	 * @param allGrids
+	 * @param allGridsKeys
+	 ***********************************************/
 	public void processHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 		System.out.println("Processing Hashes");
 		Object[] gridArray = allGrids.keySet().toArray();
@@ -480,6 +498,12 @@ private byte [][] LDI = new byte[][] {
 		}
 	}
 	
+	/*****************************************************
+	 * @param allGrids
+	 * @param allGridsKeys
+	 * @param currentBoard
+	 * @return
+	 *****************************************************/
 	public String findMove (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys, gridArrayClass currentBoard){
 		String theMove = "";
 		byte moveRow1 = 1;
@@ -571,13 +595,13 @@ private byte [][] LDI = new byte[][] {
 		return theMove;
 	}
 	
-	/**
+	/***************************************************************************
 	 * @param theMove - The servers MOVE string
 	 * @param theGrid - The current grid
 	 * 
 	 * Decodes the servers string into our format and then adds it to our grid
 	 * for us to parse
-	 */
+	 ***************************************************************************/
 	public void parseMove (String theMove, gridArrayClass theGrid){
 		byte moveRow1 = 1;
 		byte moveRow2 = 1;
