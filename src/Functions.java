@@ -16,22 +16,8 @@ public class Functions {
 	private  int lastoptionrow2;
 	private  int lastoptioncol2;
 	
-	private byte [][] gridInit = new byte[][] { 
-		
-		{0,0,0,0,0},
-		{0,0,0,0,0},
-		{0,0,0,0,0},
-		{0,0,0,0,0},
-		{0,0,0,0,0}
-				
-		};
-	
-	private  gridArrayClass grid = new gridArrayClass(gridInit, true, false);
-	private  Option optionroot = new Option (grid,0,0,0,0);
 	
 	private  GenericTree<Option> tree = new GenericTree<Option>();
-
-	private  gridArrayClass tempgrid = new gridArrayClass(gridInit, true, false);
 
 	public  int number = 0;
 	
@@ -195,17 +181,17 @@ private byte [][] BRVI = new byte[][] {
 	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
     			for (int col = 0; col <= this.getNumofcols() - 1;col++){
-    				if (this.canPlaceHor (grid,r,col)){
+    				if (this.canPlaceHor (Main.grid,r,col)){
         					if (col == this.getNumofcols() - 1){
         						
         					}
-        					else this.placeOption(grid,r,col,r,col + 1, allGrids, allGridsKeys);
+        					else this.placeOption(Main.grid,r,col,r,col + 1, allGrids, allGridsKeys);
     				}
-    				if (this.canPlaceVer (grid,r,col)){
+    				if (this.canPlaceVer (Main.grid,r,col)){
     					if (r == this.getNumofrows() - 1){
     						
     					}
-    					else this.placeOption(grid,r,col,r + 1,col, allGrids, allGridsKeys);
+    					else this.placeOption(Main.grid,r,col,r + 1,col, allGrids, allGridsKeys);
     				}
     			}
     		}
@@ -666,32 +652,10 @@ private byte [][] BRVI = new byte[][] {
 		this.lastoptioncol2 = lastoptioncol2;
 	}
 	
-	public  Option getOptionroot() {
-		return optionroot;
-	}
-	public  void setOptionroot(Option optionroot) {
-		this.optionroot = optionroot;
-	}
 	public  GenericTree<Option> getTree() {
 		return tree;
 	}
 	public  void setTree(GenericTree<Option> tree) {
 		this.tree = tree;
-	}
-	
-	public  gridArrayClass getGrid() {
-		return grid;
-	}
-	
-	public  void setGrid(gridArrayClass grid) {
-		this.grid = grid;
-		setTempgrid(grid);
-	}
-	
-	public  gridArrayClass getTempgrid() {
-		return tempgrid;
-	}
-	public  void setTempgrid(gridArrayClass tempgrid) {
-		this.tempgrid = tempgrid;
 	}
 }

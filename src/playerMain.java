@@ -312,7 +312,6 @@ public class playerMain {
 					}
 				}
 
-				f.setGrid(grid);
 				int numofrows = 5;
 				int numofcols = 5;
 				f.setNumofcols(numofcols);
