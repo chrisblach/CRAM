@@ -45,7 +45,7 @@ public class Main {
 		GenericTreeNode <Option> root =  new GenericTreeNode<Option>(Functions.getOptionroot());
 		Functions.getTree().setRoot(root);*/
 		
-		//System.out.println("Worst return: " + functionsInstance.checkForWorst(grid));
+		System.out.println("Worst return: " + functionsInstance.checkForWorst(grid));
 		
 		HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
 

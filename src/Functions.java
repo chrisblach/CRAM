@@ -41,7 +41,135 @@ public class Functions {
 	private LinkedList<gridArrayClass> worstCases = new LinkedList<gridArrayClass>();
 	private LinkedList<String> worstCaseMoves = new LinkedList<String>();
 	
+	private byte [][] TLHI = new byte[][] { 
+			
+			{1,1,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TLHG = new gridArrayClass(gridInit, true, false);
+		
+	String TLHS = "C3D3";
+	
+private byte [][] TLVI = new byte[][] { 
+			
+			{1,0,0,0,0},
+			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TLVG = new gridArrayClass(gridInit, true, false);
+		
+	String TLVS = "C3C4";
+	
+private byte [][] BLHI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,1,0,0,0}
+					
+			};
+		
+	private  gridArrayClass BLHG = new gridArrayClass(gridInit, true, false);
+		
+	String BLHS = "C3D3";
+	
+private byte [][] BLVI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,0},
+			{1,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass BLVG = new gridArrayClass(gridInit, true, false);
+		
+	String BLVS = "C2C3";
+	
+private byte [][] TRHI = new byte[][] { 
+			
+			{0,0,0,1,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TRHG = new gridArrayClass(gridInit, true, false);
+		
+	String TRHS = "B3C3";
+	
+private byte [][] TRVI = new byte[][] { 
+			
+			{0,0,0,0,1},
+			{0,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TRVG = new gridArrayClass(gridInit, true, false);
+		
+	String TRVS = "C3C4";
+	
+private byte [][] BRHI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,1,1}
+					
+			};
+		
+	private  gridArrayClass BRHG = new gridArrayClass(gridInit, true, false);
+		
+	String BRHS = "B3C3";
+	
+private byte [][] BRVI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,1},
+			{0,0,0,0,1}
+					
+			};
+		
+	private  gridArrayClass BRVG = new gridArrayClass(gridInit, true, false);
+		
+	String BRVS = "C2C3";
+	
 	public String checkForWorst(gridArrayClass passedGrid){
+		worstCases.add(TLHG);
+		worstCases.add(TLVG);
+		worstCases.add(BLHG);
+		worstCases.add(BLVG);
+		worstCases.add(TRHG);
+		worstCases.add(TRVG);
+		worstCases.add(BRHG);
+		worstCases.add(BRVG);
+		worstCaseMoves.add(TLHS);
+		worstCaseMoves.add(TLVS);
+		worstCaseMoves.add(BLHS);
+		worstCaseMoves.add(BLVS);
+		worstCaseMoves.add(TRHS);
+		worstCaseMoves.add(TRVS);
+		worstCaseMoves.add(BRHS);
+		worstCaseMoves.add(BRVS);
 		String returnString = "N";
 		for (int worst = 0; worst < 8; worst++){
 			if (passedGrid.equals(worstCases.get(worst))){
@@ -157,7 +285,7 @@ public class Functions {
 					LinkedList<Option> keyGridList = allGrids.get(gridArray[i]);
 					int winCount = 0;
 					int processedCount = 0;
-					int childrenCount = 0;
+					long childrenCount = 0;
 					for (int j = 0; j < keyGridList.size(); j++)
 					{
 						if(allGridsKeys.get(keyGridList.get(j).getGrid()).getProcessed()){
