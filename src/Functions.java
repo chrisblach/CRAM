@@ -325,11 +325,13 @@ private byte [][] LDI = new byte[][] {
 		String returnString = "N";
 		for (int worst = 0; worst < 16; worst++){
 			if (passedGrid.equals(worstCases.get(worst))){
+				//If a worst case is found, return the pre-calculated best move
 				System.out.println("Starting grid is a worst case");
 				returnString = worstCaseMoves.get(worst);
 				break;
 			}
 		}
+		//If a worst case is not found, return N
 		return returnString;
 	}
 	
@@ -353,6 +355,8 @@ private byte [][] LDI = new byte[][] {
 	/**
 	 * @param allGrids
 	 * @param allGridsKeys
+	 * 
+	 * Adds all possible moves from the starting grid to hash maps
 	 */
 	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
@@ -377,6 +381,8 @@ private byte [][] LDI = new byte[][] {
 	/***********************************************
 	 * @param allGrids
 	 * @param allGridsKeys
+	 * 
+	 * Adds all possible board states to the hash maps, looping until complete
 	 ***********************************************/
 	@SuppressWarnings("unchecked")
 	public void fillHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){         
@@ -438,6 +444,8 @@ private byte [][] LDI = new byte[][] {
 	/***********************************************
 	 * @param allGrids
 	 * @param allGridsKeys
+	 * 
+	 * Parses the hash maps to find winning boards, count children and determine win ratios
 	 ***********************************************/
 	public void processHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
 		System.out.println("Processing Hashes");
@@ -502,7 +510,9 @@ private byte [][] LDI = new byte[][] {
 	 * @param allGrids
 	 * @param allGridsKeys
 	 * @param currentBoard
-	 * @return
+	 * @return String for our move in the format provided to us by the server
+	 * 
+	 * Finds the best possible move for us given the current board state using the pre-calculated states
 	 *****************************************************/
 	public String findMove (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys, gridArrayClass currentBoard){
 		String theMove = "";
@@ -600,7 +610,6 @@ private byte [][] LDI = new byte[][] {
 	 * @param theGrid - The current grid
 	 * 
 	 * Decodes the servers string into our format and then adds it to our grid
-	 * for us to parse
 	 ***************************************************************************/
 	public void parseMove (String theMove, gridArrayClass theGrid){
 		byte moveRow1 = 1;
@@ -689,11 +698,11 @@ private byte [][] LDI = new byte[][] {
 	 * @param col1 - The column we want to place the move on
 	 * @param row2 - The second row we want to place the move on
 	 * @param col2 - The second column we want to place the move on
-	 * @param allGrids - 
-	 * @param allGridsKeys -
+	 * @param allGrids - The hash map containing all the grids and options
+	 * @param allGridsKeys - The hash map containing all of the grids to allow for key modification
 	 *
-	 * Takes the option that was previous checked if it can be placed, and places it in the grid. 
-	 * The grid is then taken and put into the HashMap
+	 * Attempts to add a move into the Hash Maps, adding it to a current key if it exists or 
+	 * creating a new key if it does not
 	 *
 	 *********************************************************************************************/
 	public  void placeOption (gridArrayClass currentgrid, int row1, int col1, int row2, int col2, HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){

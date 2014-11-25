@@ -56,6 +56,8 @@ public class gridArrayClass {
 /*
  * (non-Javadoc)
  * @see java.lang.Object#hashCode()
+ * 
+ * Overridden to ensure only the grids are compared with hashing, not the other variables
  */
 	@Override
   public int hashCode() {
@@ -66,6 +68,8 @@ public class gridArrayClass {
 /*
  * (non-Javadoc)
  * @see java.lang.Object#equals(java.lang.Object)
+ * 
+ * Overridden to ensure only the grids are compared with equals, not the other variables
  */
   @Override
   public boolean equals( Object b ) {
@@ -93,6 +97,8 @@ public class gridArrayClass {
   /*
    * (non-Javadoc)
    * @see java.lang.Object#toString()
+   * 
+   * Overridden to provide a legible System.out
    */
   public String toString(){
 	  String returnString = "";

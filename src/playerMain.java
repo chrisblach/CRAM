@@ -40,7 +40,6 @@ public class playerMain {
 		private static DataInputStream is = null;
 
 		private static BufferedReader inputLine = null;
-		private static boolean closed = false;
 		
 		private static String input;
 		

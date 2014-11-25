@@ -1,6 +1,3 @@
-import java.util.Arrays;
-
-
 public class Option {
 	private gridArrayClass grid;
 	private int rowOne;
