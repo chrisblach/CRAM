@@ -298,6 +298,7 @@ private static byte [][] gridInit = new byte[][] {
 			////////////////////////////////////////////////////////
 			
 			if (!boardSolved){
+				System.out.println("Board not solved.");
 				int row = 0;
 				int col = 0;
 				for (int i = 1; i <= boardAsString.length(); i++){
@@ -348,16 +349,11 @@ private static byte [][] gridInit = new byte[][] {
 				
 			}
 			else{
+				System.out.println("Board already solved.");
 				f.parseMove(previousMove, grid);
-				
 				theMove = f.findMove(allGrids, allGridsKeys, grid);
 				System.out.println(theMove);
-			}
-					
-
-					theMove = f.findMove(allGrids, allGridsKeys, grid);
-					
-					System.out.println(theMove);
+			}	
 					
 					for(int i = 0; i < 5; i++)
 					   {
