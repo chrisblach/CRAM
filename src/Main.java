@@ -62,6 +62,7 @@ public class Main {
 				allGrids.put(grid, startGridList);
 				functionsInstance.solve(allGrids, allGridsKeys);
 				boardSolved = true;
+				System.out.println("Starting board Calc:\n" + allGridsKeys.get(grid));
 				String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
 				System.out.println("Our Move: " + theMove);
 				functionsInstance.parseMove(theMove, grid);
