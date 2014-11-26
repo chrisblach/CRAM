@@ -361,17 +361,17 @@ private byte [][] LDI = new byte[][] {
 	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
     			for (int col = 0; col <= this.getNumofcols() - 1;col++){
-    				if (this.canPlaceHor (Main.grid,r,col)){
+    				if (this.canPlaceHor (playerMain.grid,r,col)){
         					if (col == this.getNumofcols() - 1){
         						
         					}
-        					else this.placeOption(Main.grid,r,col,r,col + 1, allGrids, allGridsKeys);
+        					else this.placeOption(playerMain.grid,r,col,r,col + 1, allGrids, allGridsKeys);
     				}
-    				if (this.canPlaceVer (Main.grid,r,col)){
+    				if (this.canPlaceVer (playerMain.grid,r,col)){
     					if (r == this.getNumofrows() - 1){
     						
     					}
-    					else this.placeOption(Main.grid,r,col,r + 1,col, allGrids, allGridsKeys);
+    					else this.placeOption(playerMain.grid,r,col,r + 1,col, allGrids, allGridsKeys);
     				}
     			}
     		}

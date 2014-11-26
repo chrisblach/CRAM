@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 
 public class playerMain {
-	private static byte [][] gridInit = new byte[][] { 
+private static byte [][] gridInit = new byte[][] { 
 		
 		{0,0,0,0,0},
 		{0,0,0,0,0},
@@ -23,15 +23,14 @@ public class playerMain {
 				
 		};
 
-	private static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
-	
-	static HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
-	
-	static HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
-	
+	public static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
+
 	static boolean boardSolved = false;
 	
 	private static Functions f = new Functions ();
+	static String theMove;
+	
+	
 	// The client socket
 		private static Socket clientSocket = null;
 		// The output stream
@@ -50,7 +49,6 @@ public class playerMain {
 		private static String turn;
 		private static String boardAsString;
 		private static String previousMove;
-		static String theMove;	
 		public static void main(String[] args) throws UnknownHostException, IOException{
 			
 			//////////////////////////////////////////////////
@@ -295,6 +293,10 @@ public class playerMain {
 			//
 			////////////////////////////////////////////////////////
 					
+			HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+			HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
+			
 			if (!boardSolved){
 				int row = 0;
 				int col = 0;
@@ -310,17 +312,33 @@ public class playerMain {
 						col = 0;
 					}
 				}
-
+				
 				int numofrows = 5;
 				int numofcols = 5;
+				
+				
+				System.out.println("Starting board:\n" + grid);
 				f.setNumofcols(numofcols);
 				f.setNumofrows(numofrows);
 
-				LinkedList<Option> startGridList = new LinkedList<Option>();
-				allGridsKeys.put(grid, grid);
-				allGrids.put(grid, startGridList);
-
-				f.solve(allGrids, allGridsKeys);
+				String worstReturn = f.checkForWorst(grid);
+				if(worstReturn.equals("N")){
+					System.out.println("Not a worst case starting grid.");
+					LinkedList<Option> startGridList1 = new LinkedList<Option>();
+					allGridsKeys.put(grid, grid);
+					allGrids.put(grid, startGridList1);
+					f.solve(allGrids, allGridsKeys);
+					boardSolved = true;
+					String theMove = f.findMove(allGrids, allGridsKeys, grid);
+					System.out.println("Our Move: " + theMove);
+					f.parseMove(theMove, grid);
+				}
+				else{
+					System.out.println("Worst case starting grid.");
+					System.out.println("Our Move: " + worstReturn);
+					f.parseMove(worstReturn, grid);
+				}
+				System.out.println("Their board:\n" + grid);
 				boardSolved = true;
 				System.out.println("Done");
 				

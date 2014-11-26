@@ -8,10 +8,10 @@ public class Main {
 	//Starting grid which can be manually set for testing
 	public static byte [][] gridInit = new byte[][] { 
 			
+			{1,0,1,0,0},
+			{1,0,0,0,0},
 			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
+			{1,0,0,0,0},
 			{0,0,0,0,0}
 					
 			};
