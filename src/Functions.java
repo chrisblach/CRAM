@@ -274,6 +274,202 @@ private byte [][] LDI = new byte[][] {
 	private  gridArrayClass LDG = new gridArrayClass(LDI, true, false);
 		
 	String LDS = "B2C2";
+	
+private byte [][] TLSHI = new byte[][] { 
+			
+			{1,0,1,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TLSHG = new gridArrayClass(TLSHI, true, false);
+		
+	String TLSHS = "B2B3";
+	
+private byte [][] TLSVI = new byte[][] { 
+			
+			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TLSVG = new gridArrayClass(TLSVI, true, false);
+		
+	String TLSVS = "B2C2";
+	
+private byte [][] TRSHI = new byte[][] { 
+			
+			{0,0,1,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TRSHG = new gridArrayClass(TRSHI, true, false);
+		
+	String TRSHS = "D2D3";
+	
+private byte [][] TRSVI = new byte[][] { 
+			
+			{0,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TRSVG = new gridArrayClass(TRSVI, true, false);
+		
+	String TRSVS = "C2D2";
+	
+private byte [][] BRSHI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,1,0,1}
+					
+			};
+		
+	private  gridArrayClass BRSHG = new gridArrayClass(BRSHI, true, false);
+		
+	String BRSHS = "D3D4";
+	
+private byte [][] BRSVI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,1}
+					
+			};
+		
+	private  gridArrayClass BRSVG = new gridArrayClass(BRSVI, true, false);
+		
+	String BRSVS = "C4D4";
+	
+private byte [][] BLSHI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,1,0,0}
+					
+			};
+		
+	private  gridArrayClass BLSHG = new gridArrayClass(BLSHI, true, false);
+		
+	String BLSHS = "B3B4";
+
+private byte [][] BLSVI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass BLSVG = new gridArrayClass(BLSVI, true, false);
+		
+	String BLSVS = "B4C4";
+	//new 2
+private byte [][] BLTLI = new byte[][] { 
+			
+			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass BLTLG = new gridArrayClass(BLTLI, true, false);
+		
+	String BLTLS = "C2C3";
+	
+private byte [][] BLTRI = new byte[][] { 
+			
+			{0,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass BLTRG = new gridArrayClass(BLTRI, true, false);
+		
+	String BLTRS = "C2D2";
+	
+private byte [][] BLBRI = new byte[][] { 
+			
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{1,0,0,0,1}
+					
+			};
+		
+	private  gridArrayClass BLBRG = new gridArrayClass(BLBRI, true, false);
+		
+	String BLBRS = "B3C3";
+	
+private byte [][] TLTRI = new byte[][] { 
+			
+			{1,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0}
+					
+			};
+		
+	private  gridArrayClass TLTRG = new gridArrayClass(TLTRI, true, false);
+		
+	String TLTRS = "B3C3";
+	
+private byte [][] TLBRI = new byte[][] { 
+			
+			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,1}
+					
+			};
+		
+	private  gridArrayClass TLBRG = new gridArrayClass(TLBRI, true, false);
+		
+	String TLBRS = "B2C2";
+	
+private byte [][] TRBRI = new byte[][] { 
+			
+			{0,0,0,0,1},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,1}
+					
+			};
+		
+	private  gridArrayClass TRBRG = new gridArrayClass(TRBRI, true, false);
+		
+	String TRBRS = "C2C3";
 	/*
 	 * 
 	 * 
@@ -290,6 +486,7 @@ private byte [][] LDI = new byte[][] {
 	 * Method to check for the worst case. Simple compare.
 	 ***********************************************************/
 	public String checkForWorst(gridArrayClass passedGrid){
+		worstCases.clear();
 		worstCases.add(TLHG);
 		worstCases.add(TLVG);
 		worstCases.add(BLHG);
@@ -306,6 +503,21 @@ private byte [][] LDI = new byte[][] {
 		worstCases.add(BRG);
 		worstCases.add(LUG);
 		worstCases.add(LDG);
+		worstCases.add(TLSHG);
+		worstCases.add(TLSVG);
+		worstCases.add(TRSVG);
+		worstCases.add(TRSHG);
+		worstCases.add(BRSHG);
+		worstCases.add(BRSVG);
+		worstCases.add(BLSVG);
+		worstCases.add(BLSHG);
+		worstCases.add(BLTLG);
+		worstCases.add(BLTRG);
+		worstCases.add(BLBRG);
+		worstCases.add(TLTRG);
+		worstCases.add(TLBRG);
+		worstCases.add(TRBRG);
+		worstCaseMoves.clear();
 		worstCaseMoves.add(TLHS);
 		worstCaseMoves.add(TLVS);
 		worstCaseMoves.add(BLHS);
@@ -322,8 +534,22 @@ private byte [][] LDI = new byte[][] {
 		worstCaseMoves.add(BRS);
 		worstCaseMoves.add(LUS);
 		worstCaseMoves.add(LDS);
+		worstCaseMoves.add(TLSHS);
+		worstCaseMoves.add(TLSVS);
+		worstCaseMoves.add(TRSVS);
+		worstCaseMoves.add(TRSHS);
+		worstCaseMoves.add(BRSHS);
+		worstCaseMoves.add(BRSVS);
+		worstCaseMoves.add(BLSVS);
+		worstCaseMoves.add(BLSHS);
+		worstCaseMoves.add(BLTLS);
+		worstCaseMoves.add(BLTRS);
+		worstCaseMoves.add(BLBRS);
+		worstCaseMoves.add(TLTRS);
+		worstCaseMoves.add(TLBRS);
+		worstCaseMoves.add(TRBRS);
 		String returnString = "N";
-		for (int worst = 0; worst < 16; worst++){
+		for (int worst = 0; worst < worstCases.size(); worst++){
 			if (passedGrid.equals(worstCases.get(worst))){
 				//If a worst case is found, return the pre-calculated best move
 				System.out.println("Starting grid is a worst case");

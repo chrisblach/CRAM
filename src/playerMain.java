@@ -24,7 +24,7 @@ private static byte [][] gridInit = new byte[][] {
 		};
 
 	public static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
-
+	
 	static boolean boardSolved = false;
 	
 	private static Functions f = new Functions ();
@@ -50,6 +50,10 @@ private static byte [][] gridInit = new byte[][] {
 		private static String boardAsString;
 		private static String previousMove;
 		public static void main(String[] args) throws UnknownHostException, IOException{
+			
+			HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+			HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 			
 			//////////////////////////////////////////////////
 			// JOIN SERVER
@@ -195,7 +199,7 @@ private static byte [][] gridInit = new byte[][] {
 					
 					// got board of game ... now prompt player move
 					
-					String pMove = move();
+					String pMove = move(allGrids, allGridsKeys);
 					
 					os.println(gameID + "P1" + pMove);	// send player move to master server
 					
@@ -252,7 +256,7 @@ private static byte [][] gridInit = new byte[][] {
 		}
 		
 		
-		public static String move() throws IOException{ // can remove exception when user input is removed
+		public static String move(HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys) throws IOException{ // can remove exception when user input is removed
 			
 			String playerMove = null;
 			
@@ -292,10 +296,6 @@ private static byte [][] gridInit = new byte[][] {
 			// NOTE ALONG WITH THE GIVE BOARD ... THE PREVIOUS MOVE IS AVAILABLE IN STRING previousMove
 			//
 			////////////////////////////////////////////////////////
-					
-			HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
-
-			HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 			
 			if (!boardSolved){
 				int row = 0;
@@ -349,6 +349,7 @@ private static byte [][] gridInit = new byte[][] {
 			}
 			else{
 				f.parseMove(previousMove, grid);
+				
 				theMove = f.findMove(allGrids, allGridsKeys, grid);
 				System.out.println(theMove);
 			}
