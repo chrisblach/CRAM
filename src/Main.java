@@ -8,10 +8,10 @@ public class Main {
 	//Starting grid which can be manually set for testing
 	public static byte [][] gridInit = new byte[][] { 
 			
-			{1,0,1,0,0},
-			{1,0,0,0,0},
 			{0,0,0,0,0},
-			{1,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
+			{0,0,0,0,0},
 			{0,0,0,0,0}
 					
 			};
@@ -42,6 +42,13 @@ public class Main {
 		//Hash map to contain all the possible board layouts contained in the first hash map to allow changes to the keys
 		HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 		
+		System.out.println("Initial board config:");
+		String initialPegs = null;
+		while(initialPegs == null){		
+			initialPegs = inputLine.readLine();
+		}
+		functionsInstance.parseMove(initialPegs, grid);
+		
 		System.out.println("Starting board:\n" + grid);
 		
 		//First asks if we play first
@@ -60,7 +67,7 @@ public class Main {
 				LinkedList<Option> startGridList = new LinkedList<Option>();
 				allGridsKeys.put(grid, grid);
 				allGrids.put(grid, startGridList);
-				functionsInstance.solve(allGrids, allGridsKeys);
+				functionsInstance.solve(allGrids, allGridsKeys, grid);
 				boardSolved = true;
 				String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
 				System.out.println("Our Move: " + theMove);
@@ -98,7 +105,7 @@ public class Main {
 				allGridsKeys.put(grid, grid);
 				allGrids.put(grid, startGridList);
 				System.out.println("Our board:\n" + allGridsKeys.get(grid));
-				functionsInstance.solve(allGrids, allGridsKeys);
+				functionsInstance.solve(allGrids, allGridsKeys, grid);
 				boardSolved = true;
 				String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
 				System.out.println("Our Move: " + theMove);

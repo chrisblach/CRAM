@@ -340,7 +340,7 @@ private static byte [][] gridInit = new byte[][] {
 					allGridsKeys.put(grid, grid);
 					allGrids.put(grid, startGridList);
 					System.out.println("Our board:\n" + allGridsKeys.get(grid));
-					f.solve(allGrids, allGridsKeys);
+					f.solve(allGrids, allGridsKeys, grid);
 					boardSolved = true;
 					playerMove = f.findMove(allGrids, allGridsKeys, grid);
 					System.out.println("Our Move: " + playerMove);

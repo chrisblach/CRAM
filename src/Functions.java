@@ -567,11 +567,11 @@ private byte [][] TRBRI = new byte[][] {
 	 * 
 	 * Calls buildHash() to solve the given grid
 	 *********************************************/
-	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
+	public void solve (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys, gridArrayClass grid){
 	boolean done = false;
 	
 	
-	buildHash(allGrids, allGridsKeys);
+	buildHash(allGrids, allGridsKeys, grid);
 	done = true;
 	if (done){
 		System.out.println("Done");
@@ -584,20 +584,20 @@ private byte [][] TRBRI = new byte[][] {
 	 * 
 	 * Adds all possible moves from the starting grid to hash maps
 	 */
-	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys){
+	public void buildHash (HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys, gridArrayClass grid){
         	for (int r = 0;r <= this.getNumofrows() - 1;r++){
     			for (int col = 0; col <= this.getNumofcols() - 1;col++){
-    				if (this.canPlaceHor (playerMain.grid,r,col)){
+    				if (this.canPlaceHor (grid,r,col)){
         					if (col == this.getNumofcols() - 1){
         						
         					}
-        					else this.placeOption(playerMain.grid,r,col,r,col + 1, allGrids, allGridsKeys);
+        					else this.placeOption(grid,r,col,r,col + 1, allGrids, allGridsKeys);
     				}
-    				if (this.canPlaceVer (playerMain.grid,r,col)){
+    				if (this.canPlaceVer (grid,r,col)){
     					if (r == this.getNumofrows() - 1){
     						
     					}
-    					else this.placeOption(playerMain.grid,r,col,r + 1,col, allGrids, allGridsKeys);
+    					else this.placeOption(grid,r,col,r + 1,col, allGrids, allGridsKeys);
     				}
     			}
     		}

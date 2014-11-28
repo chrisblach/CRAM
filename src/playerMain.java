@@ -28,8 +28,6 @@ private static byte [][] gridInit = new byte[][] {
 	static boolean boardSolved = false;
 	
 	private static Functions f = new Functions ();
-	static String theMove;
-	
 	
 	// The client socket
 		private static Socket clientSocket = null;
@@ -328,11 +326,11 @@ private static byte [][] gridInit = new byte[][] {
 					LinkedList<Option> startGridList1 = new LinkedList<Option>();
 					allGridsKeys.put(grid, grid);
 					allGrids.put(grid, startGridList1);
-					f.solve(allGrids, allGridsKeys);
+					f.solve(allGrids, allGridsKeys, grid);
 					boardSolved = true;
-					String theMove = f.findMove(allGrids, allGridsKeys, grid);
-					System.out.println("Our Move: " + theMove);
-					f.parseMove(theMove, grid);
+					playerMove = f.findMove(allGrids, allGridsKeys, grid);
+					System.out.println("Our Move: " + playerMove);
+					f.parseMove(playerMove, grid);
 				}
 				else{
 					System.out.println("Worst case starting grid.");
@@ -340,19 +338,12 @@ private static byte [][] gridInit = new byte[][] {
 					f.parseMove(worstReturn, grid);
 				}
 				System.out.println("Their board:\n" + grid);
-				boardSolved = true;
-				System.out.println("Done");
-				
-				theMove = f.findMove(allGrids, allGridsKeys, grid);
-				
-				System.out.println(theMove);
-				
 			}
 			else{
 				System.out.println("Board already solved.");
 				f.parseMove(previousMove, grid);
-				theMove = f.findMove(allGrids, allGridsKeys, grid);
-				System.out.println(theMove);
+				playerMove = f.findMove(allGrids, allGridsKeys, grid);
+				System.out.println(playerMove);
 			}	
 					
 					for(int i = 0; i < 5; i++)
@@ -366,11 +357,6 @@ private static byte [][] gridInit = new byte[][] {
 					   }
 				      System.out.println("\n");
 				      
-			System.out.println("Enter move (for testing, to be replaced with algorithm):");
-			//playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
-			playerMove = theMove;
-			
-			
 			//////////////////////////////////////////////////////
 			// END OF ALGORITHM
 			//////////////////////////////////////////////////////
