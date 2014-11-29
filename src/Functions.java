@@ -46,439 +46,103 @@ public class Functions {
 	private LinkedList<gridArrayClass> worstCases = new LinkedList<gridArrayClass>();
 	private LinkedList<String> worstCaseMoves = new LinkedList<String>();
 	
-	/*
-	 * 
-	 *Declaration, initialization of all our worst cases (16) 
-	 * 
-	 */
-	private byte [][] TLHI = new byte[][] { 
-			
-			{1,1,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TLHG = new gridArrayClass(TLHI, true, false);
-		
-	String TLHS = "C3D3";
-	
-private byte [][] TLVI = new byte[][] { 
-			
-			{1,0,0,0,0},
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TLVG = new gridArrayClass(TLVI, true, false);
-		
-	String TLVS = "C3C4";
-	
-private byte [][] BLHI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,1,0,0,0}
-					
-			};
-		
-	private  gridArrayClass BLHG = new gridArrayClass(BLHI, true, false);
-		
-	String BLHS = "C3D3";
-	
-private byte [][] BLVI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0},
-			{1,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass BLVG = new gridArrayClass(BLVI, true, false);
-		
-	String BLVS = "C2C3";
-	
-private byte [][] TRHI = new byte[][] { 
-			
-			{0,0,0,1,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TRHG = new gridArrayClass(TRHI, true, false);
-		
-	String TRHS = "B3C3";
-	
-private byte [][] TRVI = new byte[][] { 
-			
-			{0,0,0,0,1},
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TRVG = new gridArrayClass(TRVI, true, false);
-		
-	String TRVS = "C3C4";
-	
-private byte [][] BRHI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,1,1}
-					
-			};
-		
-	private  gridArrayClass BRHG = new gridArrayClass(BRHI, true, false);
-		
-	String BRHS = "B3C3";
-	
-private byte [][] BRVI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,1},
-			{0,0,0,0,1}
-					
-			};
-		
-	private  gridArrayClass BRVG = new gridArrayClass(BRVI, true, false);
-		
-	String BRVS = "C2C3";
-	
-private byte [][] TLI = new byte[][] { 
-			
-			{0,1,1,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TLG = new gridArrayClass(TLI, true, false);
-		
-	String TLS = "D2D3";
+	private LinkedList<gridArrayClass> worstCases2 = new LinkedList<gridArrayClass>();
+	private LinkedList<String> worstCaseMoves2 = new LinkedList<String>();
 
-private byte [][] TRI = new byte[][] { 
-			
-			{0,0,1,1,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TRG = new gridArrayClass(TRI, true, false);
-		
-	String TRS = "B2B3";
+	public void learnCompile(String master, String move){
+		byte [][] addGrid = new byte[][] { 
+				
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0},
+				{0,0,0,0,0}
+						
+				};
+		byte moveRow1 = 1;
+		byte moveRow2 = 1;
+		byte moveCol1 = 1;
+		byte moveCol2 = 1;
 
-private byte [][] RUI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,1},
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
+		switch (master.charAt(0)) {
+		case 'A':
+			moveCol1 = 0;
+			break;
+		case 'B':
+			moveCol1 = 1;
+			break;
+		case 'C':
+			moveCol1 = 2;
+			break;
+		case 'D':
+			moveCol1 = 3;
+			break;
+		case 'E':
+			moveCol1 = 4;
+			break;
+		}
 		
-	private  gridArrayClass RUG = new gridArrayClass(RUI, true, false);
+		switch (master.charAt(1)) {
+		case '1':
+			moveRow1 = 0;
+			break;
+		case '2':
+			moveRow1 = 1;
+			break;
+		case '3':
+			moveRow1 = 2;
+			break;
+		case '4':
+			moveRow1 = 3;
+			break;
+		case '5':
+			moveRow1 = 4;
+			break;
+		}
 		
-	String RUS = "C4D4";
-	
-private byte [][] RDI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,1},
-			{0,0,0,0,1},
-			{0,0,0,0,0}
-					
-			};
+		switch (master.charAt(2)) {
+		case 'A':
+			moveCol2 = 0;
+			break;
+		case 'B':
+			moveCol2 = 1;
+			break;
+		case 'C':
+			moveCol2 = 2;
+			break;
+		case 'D':
+			moveCol2 = 3;
+			break;
+		case 'E':
+			moveCol2 = 4;
+			break;
+		}
 		
-	private  gridArrayClass RDG = new gridArrayClass(RDI, true, false);
+		switch (master.charAt(3)) {
+		case '1':
+			moveRow2 = 0;
+			break;
+		case '2':
+			moveRow2 = 1;
+			break;
+		case '3':
+			moveRow2 = 2;
+			break;
+		case '4':
+			moveRow2 = 3;
+			break;
+		case '5':
+			moveRow2 = 4;
+			break;
+		}
 		
-	String RDS = "C2D2";
-	
-private byte [][] BLI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,1,1,0,0}
-					
-			};
-		
-	private  gridArrayClass BLG = new gridArrayClass(BLI, true, false);
-		
-	String BLS = "D3D4";
-
-private byte [][] BRI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,1,1,0}
-					
-			};
-		
-	private  gridArrayClass BRG = new gridArrayClass(BRI, true, false);
-		
-	String BRS = "B3B4";
-	
-private byte [][] LUI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{1,0,0,0,0},
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass LUG = new gridArrayClass(LUI, true, false);
-		
-	String LUS = "B4C4";
-	
-private byte [][] LDI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0},
-			{1,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass LDG = new gridArrayClass(LDI, true, false);
-		
-	String LDS = "B2C2";
-	
-private byte [][] TLSHI = new byte[][] { 
-			
-			{1,0,1,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TLSHG = new gridArrayClass(TLSHI, true, false);
-		
-	String TLSHS = "B2B3";
-	
-private byte [][] TLSVI = new byte[][] { 
-			
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TLSVG = new gridArrayClass(TLSVI, true, false);
-		
-	String TLSVS = "B2C2";
-	
-private byte [][] TRSHI = new byte[][] { 
-			
-			{0,0,1,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TRSHG = new gridArrayClass(TRSHI, true, false);
-		
-	String TRSHS = "D2D3";
-	
-private byte [][] TRSVI = new byte[][] { 
-			
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TRSVG = new gridArrayClass(TRSVI, true, false);
-		
-	String TRSVS = "C2D2";
-	
-private byte [][] BRSHI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,1,0,1}
-					
-			};
-		
-	private  gridArrayClass BRSHG = new gridArrayClass(BRSHI, true, false);
-		
-	String BRSHS = "D3D4";
-	
-private byte [][] BRSVI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,1}
-					
-			};
-		
-	private  gridArrayClass BRSVG = new gridArrayClass(BRSVI, true, false);
-		
-	String BRSVS = "C4D4";
-	
-private byte [][] BLSHI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,1,0,0}
-					
-			};
-		
-	private  gridArrayClass BLSHG = new gridArrayClass(BLSHI, true, false);
-		
-	String BLSHS = "B3B4";
-
-private byte [][] BLSVI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass BLSVG = new gridArrayClass(BLSVI, true, false);
-		
-	String BLSVS = "B4C4";
-	//new 2
-private byte [][] BLTLI = new byte[][] { 
-			
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass BLTLG = new gridArrayClass(BLTLI, true, false);
-		
-	String BLTLS = "C2C3";
-	
-private byte [][] BLTRI = new byte[][] { 
-			
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass BLTRG = new gridArrayClass(BLTRI, true, false);
-		
-	String BLTRS = "C2D2";
-	
-private byte [][] BLBRI = new byte[][] { 
-			
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{1,0,0,0,1}
-					
-			};
-		
-	private  gridArrayClass BLBRG = new gridArrayClass(BLBRI, true, false);
-		
-	String BLBRS = "B3C3";
-	
-private byte [][] TLTRI = new byte[][] { 
-			
-			{1,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-					
-			};
-		
-	private  gridArrayClass TLTRG = new gridArrayClass(TLTRI, true, false);
-		
-	String TLTRS = "B3C3";
-	
-private byte [][] TLBRI = new byte[][] { 
-			
-			{1,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,1}
-					
-			};
-		
-	private  gridArrayClass TLBRG = new gridArrayClass(TLBRI, true, false);
-		
-	String TLBRS = "B2C2";
-	
-private byte [][] TRBRI = new byte[][] { 
-			
-			{0,0,0,0,1},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,1}
-					
-			};
-		
-	private  gridArrayClass TRBRG = new gridArrayClass(TRBRI, true, false);
-		
-	String TRBRS = "C2C3";
-	/*
-	 * 
-	 * 
-	 * End Worst Cases
-	 * 
-	 * 
-	 *
-	 */
-	
+	addGrid[moveRow1][moveCol1] = 1;
+    addGrid[moveRow2][moveCol2] = 1;
+    gridArrayClass moveArrayClass = new gridArrayClass(addGrid, true, false);
+   
+	worstCases2.add(moveArrayClass);
+	worstCaseMoves2.add(move);
+}
 	/************************************************************
 	 * @param passedGrid - Starting grid if going first
 	 * @return String of the move to take with that worst move
@@ -486,74 +150,12 @@ private byte [][] TRBRI = new byte[][] {
 	 * Method to check for the worst case. Simple compare.
 	 ***********************************************************/
 	public String checkForWorst(gridArrayClass passedGrid){
-		worstCases.clear();
-		worstCases.add(TLHG);
-		worstCases.add(TLVG);
-		worstCases.add(BLHG);
-		worstCases.add(BLVG);
-		worstCases.add(TRHG);
-		worstCases.add(TRVG);
-		worstCases.add(BRHG);
-		worstCases.add(BRVG);
-		worstCases.add(TLG);
-		worstCases.add(TRG);
-		worstCases.add(RUG);
-		worstCases.add(RDG);
-		worstCases.add(BLG);
-		worstCases.add(BRG);
-		worstCases.add(LUG);
-		worstCases.add(LDG);
-		worstCases.add(TLSHG);
-		worstCases.add(TLSVG);
-		worstCases.add(TRSVG);
-		worstCases.add(TRSHG);
-		worstCases.add(BRSHG);
-		worstCases.add(BRSVG);
-		worstCases.add(BLSVG);
-		worstCases.add(BLSHG);
-		worstCases.add(BLTLG);
-		worstCases.add(BLTRG);
-		worstCases.add(BLBRG);
-		worstCases.add(TLTRG);
-		worstCases.add(TLBRG);
-		worstCases.add(TRBRG);
-		worstCaseMoves.clear();
-		worstCaseMoves.add(TLHS);
-		worstCaseMoves.add(TLVS);
-		worstCaseMoves.add(BLHS);
-		worstCaseMoves.add(BLVS);
-		worstCaseMoves.add(TRHS);
-		worstCaseMoves.add(TRVS);
-		worstCaseMoves.add(BRHS);
-		worstCaseMoves.add(BRVS);
-		worstCaseMoves.add(TLS);
-		worstCaseMoves.add(TRS);
-		worstCaseMoves.add(RUS);
-		worstCaseMoves.add(RDS);
-		worstCaseMoves.add(BLS);
-		worstCaseMoves.add(BRS);
-		worstCaseMoves.add(LUS);
-		worstCaseMoves.add(LDS);
-		worstCaseMoves.add(TLSHS);
-		worstCaseMoves.add(TLSVS);
-		worstCaseMoves.add(TRSVS);
-		worstCaseMoves.add(TRSHS);
-		worstCaseMoves.add(BRSHS);
-		worstCaseMoves.add(BRSVS);
-		worstCaseMoves.add(BLSVS);
-		worstCaseMoves.add(BLSHS);
-		worstCaseMoves.add(BLTLS);
-		worstCaseMoves.add(BLTRS);
-		worstCaseMoves.add(BLBRS);
-		worstCaseMoves.add(TLTRS);
-		worstCaseMoves.add(TLBRS);
-		worstCaseMoves.add(TRBRS);
 		String returnString = "N";
-		for (int worst = 0; worst < worstCases.size(); worst++){
-			if (passedGrid.equals(worstCases.get(worst))){
+		for (int worst = 0; worst < worstCases2.size(); worst++){
+			if (passedGrid.equals(worstCases2.get(worst))){
 				//If a worst case is found, return the pre-calculated best move
-				System.out.println("Starting grid is a worst case");
-				returnString = worstCaseMoves.get(worst);
+				System.out.println("Grid already learned!");
+				returnString = worstCaseMoves2.get(worst);
 				break;
 			}
 		}

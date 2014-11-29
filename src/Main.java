@@ -1,5 +1,10 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -42,6 +47,34 @@ public class Main {
 		//Hash map to contain all the possible board layouts contained in the first hash map to allow changes to the keys
 		HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 		
+		
+		String path;
+		path = "Learn.data";
+		FileReader fr = new FileReader(path);
+		FileReader fr2 = new FileReader(path);
+		BufferedReader textReader = new BufferedReader(fr);
+		BufferedReader buffer = new BufferedReader(fr2);
+		String line;
+		int numberOfLines = 0;
+		while ((line = buffer.readLine()) != null){
+			numberOfLines++;
+		}
+		String [] textData = new String[numberOfLines];
+		for (int i = 0; i < numberOfLines; i++){
+			textData[i] = textReader.readLine();
+		}
+		int j = 0;
+		while (j < numberOfLines){
+		String parts [] = textData[j].split(",");
+		String master = parts[0];
+		String move = parts[1];
+		functionsInstance.learnCompile(master, move);
+		j++;
+		}
+	
+		//functionsInstance.print();
+		
+		
 		System.out.println("Initial board config:");
 		String initialPegs = null;
 		while(initialPegs == null){		
@@ -63,13 +96,20 @@ public class Main {
 			String worstReturn = functionsInstance.checkForWorst(grid);
 			//If it's an easier board then find the move normally
 			if(worstReturn.equals("N")){
-				System.out.println("Not a worst case starting grid.");
+				System.out.println("Solving... and Learning starting grid");
 				LinkedList<Option> startGridList = new LinkedList<Option>();
 				allGridsKeys.put(grid, grid);
 				allGrids.put(grid, startGridList);
 				functionsInstance.solve(allGrids, allGridsKeys, grid);
 				boardSolved = true;
 				String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
+				try {
+				    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Learn.data", true)));
+				    out.println(initialPegs + "," + theMove);
+				    out.close();
+				} catch (IOException e) {
+				    //exception handling left as an exercise for the reader
+				}
 				System.out.println("Our Move: " + theMove);
 				functionsInstance.parseMove(theMove, grid);
 			}
