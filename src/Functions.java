@@ -49,7 +49,7 @@ public class Functions {
 	private LinkedList<gridArrayClass> worstCases2 = new LinkedList<gridArrayClass>();
 	private LinkedList<String> worstCaseMoves2 = new LinkedList<String>();
 
-	public void learnCompile(String master, String move){
+	public void learnCompile(String master, String move,String bool){
 		byte [][] addGrid = new byte[][] { 
 				
 				{0,0,0,0,0},
@@ -138,7 +138,17 @@ public class Functions {
 		
 	addGrid[moveRow1][moveCol1] = 1;
     addGrid[moveRow2][moveCol2] = 1;
-    gridArrayClass moveArrayClass = new gridArrayClass(addGrid, true, false);
+
+	
+	boolean win;
+    if (bool.equals("true")){
+    	
+    	win = true;
+    }
+    else {
+    	win = false;
+    }
+    gridArrayClass moveArrayClass = new gridArrayClass(addGrid, win, false);
    
 	worstCases2.add(moveArrayClass);
 	worstCaseMoves2.add(move);
@@ -162,7 +172,19 @@ public class Functions {
 		//If a worst case is not found, return N
 		return returnString;
 	}
-	
+	public String checkForWin(gridArrayClass passedGrid){
+		String returnWin = "true";
+		for (int worst = 0; worst < worstCases2.size(); worst++){
+			if (passedGrid.equals(worstCases2.get(worst))){
+				if(worstCases2.get(worst).getWin() == false){
+					returnWin = "false";
+				}
+				break;
+			}
+		}
+		return returnWin;
+		
+	}
 	/*********************************************
 	 * @param allGrids - 
 	 * @param allGridsKeys - 

@@ -68,7 +68,9 @@ public class Main {
 		String parts [] = textData[j].split(",");
 		String master = parts[0];
 		String move = parts[1];
-		functionsInstance.learnCompile(master, move);
+		String bool = parts[2];
+		//System.out.println(bool);
+		functionsInstance.learnCompile(master, move,bool);
 		j++;
 		}
 	
@@ -94,6 +96,7 @@ public class Main {
 		//If we play first
 		if (moveFirst.equals("Y")){
 			String worstReturn = functionsInstance.checkForWorst(grid);
+			String winReturn = null;
 			//If it's an easier board then find the move normally
 			if(worstReturn.equals("N")){
 				System.out.println("Solving... and Learning starting grid");
@@ -101,11 +104,12 @@ public class Main {
 				allGridsKeys.put(grid, grid);
 				allGrids.put(grid, startGridList);
 				functionsInstance.solve(allGrids, allGridsKeys, grid);
+				System.out.println("Starting Grid\n" + grid);
 				boardSolved = true;
 				String theMove = functionsInstance.findMove(allGrids, allGridsKeys, grid);
 				try {
 				    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Learn.data", true)));
-				    out.println(initialPegs + "," + theMove);
+				    out.println(initialPegs + "," + theMove + "," + grid.getWin());
 				    out.close();
 				} catch (IOException e) {
 				    //exception handling left as an exercise for the reader
@@ -115,11 +119,27 @@ public class Main {
 			}
 			//If the starting grid that was set would take a long time to calculate
 			//Get a pre-calculated move
+
 			else{
+				
 				System.out.println("Worst case starting grid.");
 				System.out.println("Our Move: " + worstReturn);
+				winReturn = functionsInstance.checkForWin(grid);
+				System.out.println(winReturn);
+				boolean win;
+			    if (winReturn.equals("true")){
+			    	
+			    	win = true;
+			    }
+			    else {
+			    	win = false;
+			    }
+				
+				grid.setWin(win);
 				functionsInstance.parseMove(worstReturn, grid);
 			}
+
+			
 			System.out.println("Their board:\n" + grid);
 		}
 		//Ask for the other player's move manually for testing
