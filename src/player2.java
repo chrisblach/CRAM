@@ -7,10 +7,28 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 
 public class player2 {
+	
+private static byte [][] gridInit = new byte[][] { 
+		
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0}
+				
+		};
 
+	public static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
+	
+	static boolean boardSolved = false;
+	
+	private static Functions f = new Functions ();
+	
 	// The client socket
 			private static Socket clientSocket = null;
 			// The output stream
@@ -32,6 +50,10 @@ public class player2 {
 			private static String previousMove;
 				
 			public static void main(String[] args) throws UnknownHostException, IOException{
+				
+				HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+				HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 				
 				//////////////////////////////////////////////////
 				// JOIN SERVER
@@ -200,7 +222,7 @@ public class player2 {
 						
 						// got board of game ... now prompt player move
 						
-						String pMove = move();
+						String pMove = move(allGrids, allGridsKeys);
 						
 						os.println(gameID + "P2" + pMove);	// send player move to master server
 						
@@ -256,7 +278,7 @@ public class player2 {
 			}
 			
 			
-			public static String move() throws IOException{ // can remove exception when user input is removed
+			public static String move(HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys) throws IOException{ // can remove exception when user input is removed
 				
 				String playerMove = null;
 				
@@ -299,10 +321,32 @@ public class player2 {
 				//
 				////////////////////////////////////////////////////////
 				
-				System.out.println("Enter move (for testing, to be replaced with algorithm):");
-				playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
+				//System.out.println("Enter move (for testing, to be replaced with algorithm):");
+				//playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
 				
-				
+				//If the board has been solved already, simply find the next move
+				if (boardSolved){
+				f.parseMove(previousMove, grid);
+				System.out.println("Our board:\n" + allGridsKeys.get(grid));
+				playerMove = f.findMove(allGrids, allGridsKeys, grid);
+				System.out.println("Our Move: " + playerMove);
+				f.parseMove(playerMove, grid);
+				System.out.println("Their board:\n" + allGridsKeys.get(grid));
+				}
+				//If the board hasn't been solved yet, solve it
+				else{
+					f.parseMove(previousMove, grid);
+					LinkedList<Option> startGridList = new LinkedList<Option>();
+					allGridsKeys.put(grid, grid);
+					allGrids.put(grid, startGridList);
+					System.out.println("Our board:\n" + allGridsKeys.get(grid));
+					f.solve(allGrids, allGridsKeys, grid);
+					boardSolved = true;
+					playerMove = f.findMove(allGrids, allGridsKeys, grid);
+					System.out.println("Our Move: " + playerMove);
+					f.parseMove(playerMove, grid);
+					System.out.println("Their board:\n" + allGridsKeys.get(grid));
+				}
 				
 				//////////////////////////////////////////////////////
 				// END OF ALGORITHM

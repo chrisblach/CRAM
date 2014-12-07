@@ -7,10 +7,27 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 
 
 public class playerMain {
+private static byte [][] gridInit = new byte[][] { 
+		
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0}
+				
+		};
+
+	public static gridArrayClass grid = new gridArrayClass(gridInit, false, false);
+	
+	static boolean boardSolved = false;
+	
+	private static Functions f = new Functions ();
 	
 	// The client socket
 		private static Socket clientSocket = null;
@@ -20,7 +37,6 @@ public class playerMain {
 		private static DataInputStream is = null;
 
 		private static BufferedReader inputLine = null;
-		private static boolean closed = false;
 		
 		private static String input;
 		
@@ -31,8 +47,11 @@ public class playerMain {
 		private static String turn;
 		private static String boardAsString;
 		private static String previousMove;
-			
 		public static void main(String[] args) throws UnknownHostException, IOException{
+			
+			HashMap<gridArrayClass, LinkedList<Option>> allGrids = new HashMap<gridArrayClass, LinkedList<Option>>();
+
+			HashMap<gridArrayClass,gridArrayClass> allGridsKeys = new HashMap<gridArrayClass,gridArrayClass>();
 			
 			//////////////////////////////////////////////////
 			// JOIN SERVER
@@ -178,7 +197,7 @@ public class playerMain {
 					
 					// got board of game ... now prompt player move
 					
-					String pMove = move();
+					String pMove = move(allGrids, allGridsKeys);
 					
 					os.println(gameID + "P1" + pMove);	// send player move to master server
 					
@@ -235,7 +254,7 @@ public class playerMain {
 		}
 		
 		
-		public static String move() throws IOException{ // can remove exception when user input is removed
+		public static String move(HashMap<gridArrayClass, LinkedList<Option>> allGrids, HashMap<gridArrayClass,gridArrayClass> allGridsKeys) throws IOException{ // can remove exception when user input is removed
 			
 			String playerMove = null;
 			
@@ -276,11 +295,68 @@ public class playerMain {
 			//
 			////////////////////////////////////////////////////////
 			
-			System.out.println("Enter move (for testing, to be replaced with algorithm):");
-			playerMove = inputLine.readLine(); // for now move is just user input, for testing, replace this with your algorithm when ready
-			
-			
-			
+			if (!boardSolved){
+				System.out.println("Board not solved.");
+				int row = 0;
+				int col = 0;
+				for (int i = 1; i <= boardAsString.length(); i++){
+
+					//temp = 5*row;
+					if (boardAsString.charAt(i - 1) == 'M' || boardAsString.charAt(i - 1) == 'R' || boardAsString.charAt(i - 1) == 'B'){
+						gridInit [row][col] = 1;
+					}
+					col++;
+					if ((i % 5) == 0){
+						row++;
+						col = 0;
+					}
+				}
+				
+				int numofrows = 5;
+				int numofcols = 5;
+				
+				
+				System.out.println("Starting board:\n" + grid);
+				f.setNumofcols(numofcols);
+				f.setNumofrows(numofrows);
+
+				String worstReturn = f.checkForWorst(grid);
+				if(worstReturn.equals("N")){
+					System.out.println("Not a worst case starting grid.");
+					LinkedList<Option> startGridList1 = new LinkedList<Option>();
+					allGridsKeys.put(grid, grid);
+					allGrids.put(grid, startGridList1);
+					f.solve(allGrids, allGridsKeys, grid);
+					boardSolved = true;
+					playerMove = f.findMove(allGrids, allGridsKeys, grid);
+					System.out.println("Our Move: " + playerMove);
+					f.parseMove(playerMove, grid);
+				}
+				else{
+					System.out.println("Worst case starting grid.");
+					System.out.println("Our Move: " + worstReturn);
+					f.parseMove(worstReturn, grid);
+				}
+				System.out.println("Their board:\n" + grid);
+			}
+			else{
+				System.out.println("Board already solved.");
+				f.parseMove(previousMove, grid);
+				playerMove = f.findMove(allGrids, allGridsKeys, grid);
+				System.out.println(playerMove);
+			}	
+					
+					for(int i = 0; i < 5; i++)
+					   {
+					      for(int j = 0; j < 5; j++)
+					      {
+					         System.out.printf("%5d ", grid.grid[i][j]);
+					      }
+					      
+					      System.out.println();
+					   }
+				      System.out.println("\n");
+				      
 			//////////////////////////////////////////////////////
 			// END OF ALGORITHM
 			//////////////////////////////////////////////////////
@@ -288,5 +364,4 @@ public class playerMain {
 			return playerMove;
 			
 		}
-		
 }
